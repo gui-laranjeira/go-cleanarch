@@ -2,6 +2,7 @@ package entity_test
 
 import (
 	"testing"
+	"time"
 
 	"github.com/gui-laranjeira/go-cleanarch/internal/entity"
 	"github.com/stretchr/testify/assert"
@@ -16,87 +17,106 @@ func TestNewBook(t *testing.T) {
 
 func TestValidadeBook(t *testing.T) {
 	type test struct {
-		title     string
-		author    string
-		pages     int
-		publisher string
-		year      int
-		isbn      string
-		expect    error
+		title      string
+		author     string
+		pages      int
+		publisher  string
+		year       int
+		isbn       string
+		created_at time.Time
+		expect     error
 	}
 
 	tests := []test{
 		{
-			title:     "The Trial",
-			author:    "Franz Kafka",
-			pages:     160,
-			publisher: "Schocken",
-			year:      1925,
-			isbn:      "978-0805209990",
-			expect:    nil,
+			title:      "The Trial",
+			author:     "Franz Kafka",
+			pages:      160,
+			publisher:  "Schocken",
+			year:       1925,
+			isbn:       "978-0805209990",
+			created_at: time.Now(),
+			expect:     nil,
 		},
 		{
-			title:     "",
-			author:    "Franz Kafka",
-			pages:     160,
-			publisher: "Schocken",
-			year:      1925,
-			isbn:      "978-0805209990",
-			expect:    entity.ErrInvalidEntity,
+			title:      "",
+			author:     "Franz Kafka",
+			pages:      160,
+			publisher:  "Schocken",
+			year:       1925,
+			isbn:       "978-0805209990",
+			created_at: time.Now(),
+			expect:     entity.ErrInvalidEntity,
 		},
 		{
-			title:     "The Trial",
-			author:    "",
-			pages:     160,
-			publisher: "Schocken",
-			year:      1925,
-			isbn:      "978-0805209990",
-			expect:    entity.ErrInvalidEntity,
+			title:      "The Trial",
+			author:     "",
+			pages:      160,
+			publisher:  "Schocken",
+			year:       1925,
+			isbn:       "978-0805209990",
+			created_at: time.Now(),
+			expect:     entity.ErrInvalidEntity,
 		},
 		{
-			title:     "The Trial",
-			author:    "Franz Kafka",
-			pages:     0,
-			publisher: "Schocken",
-			year:      1925,
-			isbn:      "978-0805209990",
-			expect:    entity.ErrInvalidEntity,
+			title:      "The Trial",
+			author:     "Franz Kafka",
+			pages:      0,
+			publisher:  "Schocken",
+			year:       1925,
+			isbn:       "978-0805209990",
+			created_at: time.Now(),
+			expect:     entity.ErrInvalidEntity,
 		},
 		{
-			title:     "The Trial",
-			author:    "Franz Kafka",
-			pages:     160,
-			publisher: "",
-			year:      1925,
-			isbn:      "978-0805209990",
-			expect:    entity.ErrInvalidEntity,
+			title:      "The Trial",
+			author:     "Franz Kafka",
+			pages:      160,
+			publisher:  "",
+			year:       1925,
+			isbn:       "978-0805209990",
+			created_at: time.Now(),
+			expect:     entity.ErrInvalidEntity,
 		},
 		{
-			title:     "The Trial",
-			author:    "Franz Kafka",
-			pages:     160,
-			publisher: "Schocken",
-			year:      0,
-			isbn:      "978-0805209990",
-			expect:    entity.ErrInvalidEntity,
+			title:      "The Trial",
+			author:     "Franz Kafka",
+			pages:      160,
+			publisher:  "Schocken",
+			year:       0,
+			isbn:       "978-0805209990",
+			created_at: time.Now(),
+			expect:     entity.ErrInvalidEntity,
 		},
 		{
-			title:     "The Trial",
-			author:    "Franz Kafka",
-			pages:     160,
-			publisher: "Schocken",
-			year:      1925,
-			isbn:      "",
-			expect:    entity.ErrInvalidEntity,
+			title:      "The Trial",
+			author:     "Franz Kafka",
+			pages:      160,
+			publisher:  "Schocken",
+			year:       1925,
+			isbn:       "",
+			created_at: time.Now(),
+			expect:     entity.ErrInvalidEntity,
 		},
 		{
-			title:     "The Trial",
-			author:    "Franz Kafka",
-			pages:     -20,
-			publisher: "Schocken",
-			year:      1925,
-			isbn:      "978-0805209990",
-			expect:    entity.ErrInvalidEntity,
+			title:      "The Trial",
+			author:     "Franz Kafka",
+			pages:      -20,
+			publisher:  "Schocken",
+			year:       1925,
+			isbn:       "978-0805209990",
+			created_at: time.Now(),
+			expect:     entity.ErrInvalidEntity,
+		},
+		{
+			title:      "The Trial",
+			author:     "Franz Kafka",
+			pages:      160,
+			publisher:  "Schocken",
+			year:       -1925,
+			isbn:       "978-0805209990",
+			created_at: time.Now(),
+			expect:     entity.ErrInvalidEntity,
 		},
 		{
 			title:     "The Trial",
