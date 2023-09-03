@@ -8,16 +8,17 @@ import (
 
 type StockEntry struct {
 	Book_ID    uuid.UUID `json:"id_book"`
+	Stock_ID   uuid.UUID `json:"id_stock"`
 	User_ID    uuid.UUID `json:"id_user"`
 	Avaiable   bool      `json:"avaiable"`
 	BorrowDate time.Time `json:"borrow_date"`
 	ReturnDate time.Time `json:"return_date"`
 }
 
-func NewStockEntry(book_id uuid.UUID, user_id uuid.UUID, avaiable bool) (*StockEntry, error) {
+func NewStockEntry(book_id uuid.UUID, avaiable bool) (*StockEntry, error) {
 	r := StockEntry{
 		Book_ID:  book_id,
-		User_ID:  user_id,
+		Stock_ID: uuid.New(),
 		Avaiable: avaiable,
 	}
 
@@ -30,7 +31,7 @@ func NewStockEntry(book_id uuid.UUID, user_id uuid.UUID, avaiable bool) (*StockE
 }
 
 func (s *StockEntry) validateStockEntry() error {
-	if s.Book_ID.String() == "" || s.User_ID.String() == "" {
+	if s.Book_ID.String() == "" || s.Stock_ID.String() == "" {
 		return ErrInvalidEntity
 	}
 	return nil
