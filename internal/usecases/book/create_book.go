@@ -26,7 +26,7 @@ type CreateBookOutput struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
-type CreateBookUseCase interface {
+type ICreateBookUseCase interface {
 	CreateBook(input CreateBookInput) (*CreateBookOutput, error)
 }
 
@@ -34,7 +34,7 @@ type createBookUseCase struct {
 	bookRepository entity.IBookRepository
 }
 
-func NewCreateBookUseCase(bookRepository entity.IBookRepository) CreateBookUseCase {
+func NewCreateBookUseCase(bookRepository entity.IBookRepository) ICreateBookUseCase {
 	return &createBookUseCase{
 		bookRepository: bookRepository,
 	}
