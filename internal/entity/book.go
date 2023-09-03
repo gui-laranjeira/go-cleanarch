@@ -20,9 +20,12 @@ type Book struct {
 
 type IBookRepository interface {
 	Create(book *Book) error
-	Update(book *Book) error
+	Update(book *Book, newBook *Book) error
 	FindAll() ([]*Book, error)
-	FindByName(name string) (*Book, error)
+	FindByID(id string) (*Book, error)
+	FindByTitle(title string) (*Book, error)
+	FindByAuthor(author string) ([]*Book, error)
+	FindByPublisher(publisher string) ([]*Book, error)
 }
 
 func NewBookFactory(title string, author string, pages int, publisher string, year int, isbn string) (*Book, error) {
