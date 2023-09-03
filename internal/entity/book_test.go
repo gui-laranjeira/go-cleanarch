@@ -9,7 +9,7 @@ import (
 )
 
 func TestNewBook(t *testing.T) {
-	b, err := entity.NewBook("The Trial", "Franz Kafka", 160, "Schocken", 1925, "978-0805209990")
+	b, err := entity.NewBookFactory("The Trial", "Franz Kafka", 160, "Schocken", 1925, "978-0805209990")
 	assert.Nil(t, err)
 	assert.NotNil(t, b)
 	assert.Equal(t, b.Title, "The Trial")
@@ -130,7 +130,7 @@ func TestValidadeBook(t *testing.T) {
 	}
 
 	for _, tst := range tests {
-		_, err := entity.NewBook(tst.title, tst.author, tst.pages, tst.publisher, tst.year, tst.isbn)
+		_, err := entity.NewBookFactory(tst.title, tst.author, tst.pages, tst.publisher, tst.year, tst.isbn)
 		assert.Equal(t, tst.expect, err)
 	}
 }

@@ -18,7 +18,14 @@ type Book struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-func NewBook(title string, author string, pages int, publisher string, year int, isbn string) (*Book, error) {
+type IBookRepository interface {
+	Create(book *Book) error
+	Update(book *Book) error
+	FindAll() ([]*Book, error)
+	FindByName(name string) (*Book, error)
+}
+
+func NewBookFactory(title string, author string, pages int, publisher string, year int, isbn string) (*Book, error) {
 	r := Book{
 		ID:        uuid.New(),
 		Title:     title,
@@ -29,7 +36,7 @@ func NewBook(title string, author string, pages int, publisher string, year int,
 		ISBN:      isbn,
 		CreatedAt: time.Now(),
 	}
-	err := r.validateBook()
+	err := r.ValidateBook()
 	if err != nil {
 		return nil, ErrInvalidEntity
 	}
@@ -37,7 +44,7 @@ func NewBook(title string, author string, pages int, publisher string, year int,
 	return &r, nil
 }
 
-func (b *Book) validateBook() error {
+func (b *Book) ValidateBook() error {
 	if b.Title == "" || b.Author == "" || b.Pages <= 0 || b.Publisher == "" || b.Year <= 0 || b.ISBN == "" || b.CreatedAt.String() == "" {
 		return ErrInvalidEntity
 	}
