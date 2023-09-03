@@ -18,10 +18,10 @@ type User struct {
 	Books     []Book    `json:"books"`
 }
 
-func NewUser(email string, password string, firstName string, lastName string) (*User, error) {
+func NewUserFactory(email string, password string, firstName string, lastName string) (*User, error) {
 	err := validadePassword(password)
 	if err != nil {
-		return nil, ErrInvalidEntity
+		return nil, err
 	}
 
 	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)

@@ -68,7 +68,7 @@ func TestNewUser(t *testing.T) {
 	}
 
 	for _, tc := range tests {
-		_, err := entity.NewUser(tc.email, tc.password, tc.first_name, tc.last_name)
+		_, err := entity.NewUserFactory(tc.email, tc.password, tc.first_name, tc.last_name)
 		assert.Equal(t, tc.expect, err)
 	}
 }

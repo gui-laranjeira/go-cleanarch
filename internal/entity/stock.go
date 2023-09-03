@@ -15,7 +15,7 @@ type StockEntry struct {
 	ReturnDate time.Time `json:"return_date"`
 }
 
-func NewStockEntry(book_id uuid.UUID, avaiable bool) (*StockEntry, error) {
+func NewStockEntryFactory(book_id uuid.UUID, avaiable bool) (*StockEntry, error) {
 	r := StockEntry{
 		Book_ID:  book_id,
 		Stock_ID: uuid.New(),
