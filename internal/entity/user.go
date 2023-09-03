@@ -18,6 +18,14 @@ type User struct {
 	Books     []Book    `json:"books"`
 }
 
+type IUserRepository interface {
+	Create(user *User) error
+	Update(user *User, newUser *User) error
+	Login(email string, password string) (*User, error)
+	BorrowBook(user *User, book *Book) error
+	ReturnBook(user *User, book *Book) error
+}
+
 func NewUserFactory(email string, password string, firstName string, lastName string) (*User, error) {
 	err := validadePassword(password)
 	if err != nil {
