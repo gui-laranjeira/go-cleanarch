@@ -28,6 +28,16 @@ type IBookRepository interface {
 	FindByPublisher(publisher string) ([]*Book, error)
 }
 
+type IBookUseCase interface {
+	CreateBook(book *Book) error
+	UpdateBook(book *Book, newBook *Book) error
+	GetBooks() ([]*Book, error)
+	GetBookByID(id string) (*Book, error)
+	GetBookByTitle(title string) (*Book, error)
+	GetBookByAuthor(author string) ([]*Book, error)
+	GetBookByPublisher(publisher string) ([]*Book, error)
+}
+
 func NewBookFactory(title string, author string, pages int, publisher string, year int, isbn string) (*Book, error) {
 	r := Book{
 		ID:        uuid.New(),

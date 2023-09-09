@@ -1,24 +1,32 @@
 package repository
 
-import "github.com/gui-laranjeira/go-cleanarch/internal/entity"
+import (
+	"database/sql"
 
-func Create(book *entity.Book) error {
+	"github.com/gui-laranjeira/go-cleanarch/internal/entity"
+)
+
+type BookSQLRepository struct {
+	db *sql.DB
+}
+
+func (r *BookSQLRepository) Create(book *entity.Book) error {
 	return nil
 }
 
-func Update(book *entity.Book, newBook *entity.Book) error {
+func (r *BookSQLRepository) Update(book *entity.Book, newBook *entity.Book) error {
 	return nil
 }
 
-func FindAll() ([]*entity.Book, error) {
+func (r *BookSQLRepository) FindAll() ([]*entity.Book, error) {
 	return nil, nil
 }
 
-func FindByID(id string) (*entity.Book, error) {
+func (r *BookSQLRepository) FindByID(id string) (*entity.Book, error) {
 	return nil, nil
 }
 
-func FindByTitle(title string) (*entity.Book, error) {
+func (r *BookSQLRepository) FindByTitle(title string) (*entity.Book, error) {
 	return nil, nil
 }
 
