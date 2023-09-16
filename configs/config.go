@@ -1,6 +1,8 @@
 package configs
 
 import (
+	"os"
+
 	"github.com/spf13/viper"
 )
 
@@ -32,9 +34,14 @@ func init() {
 func Load() error {
 	viper.SetConfigName("config")
 	viper.SetConfigType("toml")
-	viper.AddConfigPath(".")
+	wd, err := os.Getwd()
+	if err != nil {
+		return err
+	}
 
-	err := viper.ReadInConfig()
+	viper.AddConfigPath(wd)
+
+	err = viper.ReadInConfig()
 	if err != nil {
 		if _, ok := err.(viper.ConfigFileAlreadyExistsError); !ok {
 			return err

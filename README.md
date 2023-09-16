@@ -1,2 +1,7 @@
-# Go Clean Architecture Implementation 
+# Library API in Go
 --- 
+
+entrypoint 
+```sh
+$ make run
+```
