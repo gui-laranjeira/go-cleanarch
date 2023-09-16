@@ -20,6 +20,6 @@ func main() {
 		w.Write([]byte("Hello World"))
 	})
 	r.Post("/books", handlers.CreateBookHandler)
-	http.ListenAndServe(":8080", r)
-	fmt.Printf("Server is running on port %v", configs.GetPort())
+	fmt.Println("Server is running on port :" + configs.GetPort())
+	http.ListenAndServe(fmt.Sprintf(":%s", configs.GetPort()), r)
 }
