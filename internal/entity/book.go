@@ -48,6 +48,7 @@ func NewBookFactory(title string, author string, pages int, publisher string, ye
 		Year:      year,
 		ISBN:      isbn,
 		CreatedAt: time.Now(),
+		UpdatedAt: time.Time{},
 	}
 	err := r.ValidateBook()
 	if err != nil {

@@ -16,10 +16,12 @@ func main() {
 	}
 
 	r := chi.NewRouter()
-	r.Get("/books", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello World"))
+	r.Route("/books", func(r chi.Router) {
+		r.Get("/", handlers.GetAllBooksHandler)
+		r.Get("/{author}", handlers.GetBookByAuthorHandler)
+		r.Post("/", handlers.CreateBookHandler)
 	})
-	r.Post("/books", handlers.CreateBookHandler)
+
 	fmt.Println("Server is running on port :" + configs.GetPort())
 	http.ListenAndServe(fmt.Sprintf(":%s", configs.GetPort()), r)
 }
