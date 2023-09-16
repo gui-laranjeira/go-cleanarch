@@ -1,20 +1,25 @@
 package main
 
 import (
-	"github.com/gofiber/fiber/v2"
-	"github.com/gui-laranjeira/go-cleanarch/internal/entity"
+	"fmt"
+	"net/http"
+
+	"github.com/go-chi/chi/v5"
+	"github.com/gui-laranjeira/go-cleanarch/configs"
+	"github.com/gui-laranjeira/go-cleanarch/internal/handlers"
 )
 
 func main() {
-	app := fiber.New()
+	err := configs.Load()
+	if err != nil {
+		panic(fmt.Errorf("fatal error config file: %w", err))
+	}
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		e, err := entity.NewUserFactory("testeteste.com", "123456", "Gui", "Laranjeira")
-		if err != nil {
-			return c.JSON(err)
-		}
-		return c.JSON(e)
+	r := chi.NewRouter()
+	r.Get("/books", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Hello World"))
 	})
-
-	app.Listen(":3000")
+	r.Post("/books", handlers.CreateBookHandler)
+	http.ListenAndServe(":8080", r)
+	fmt.Printf("Server is running on port %v", configs.GetPort())
 }
