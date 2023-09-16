@@ -6,7 +6,7 @@ type bookService struct {
 	repo entity.IBookRepository
 }
 
-func NewPostService(repo entity.IBookRepository) entity.IBookUseCase {
+func NewBookService(repo entity.IBookRepository) entity.IBookUseCase {
 	return &bookService{
 		repo: repo,
 	}
