@@ -1,6 +1,6 @@
 # Library API in Go
 
-A Library API developed to practice clean architecture with Golang, feel free to suggest changes and give your opinion on the code, constructive criticism is always welcome
+A Library API developed to practice clean architecture with Golang. Feel free to suggest changes and give your opinion on the code, constructive criticism is always welcome
 --- 
 ### What am I using
  - Chi + Postgres + Docker + Clean Architecture (literally Uncle Bob's book)
