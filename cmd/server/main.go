@@ -17,9 +17,9 @@ func main() {
 
 	r := chi.NewRouter()
 	r.Get("/books", handlers.GetAllBooksHandler)
-	// r.Get("/books/{author}", handlers.GetBookByAuthorHandler)
-	r.Post("/books", handlers.CreateBookHandler)
 	r.Get("/books/{id}", handlers.GetBookByIDHandler)
+	r.Post("/books", handlers.CreateBookHandler)
+	// r.Get("/books/{author}", handlers.GetBookByAuthorHandler)
 	// r.Route("/books", func(r chi.Router) {
 	// 	r.Get("/", handlers.GetAllBooksHandler)
 	// 	r.Get("/{author}", handlers.GetBookByAuthorHandler)
