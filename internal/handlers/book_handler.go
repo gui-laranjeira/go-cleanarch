@@ -105,3 +105,32 @@ func GetBookByAuthorHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(output)
 }
+
+func GetBookByIDHandler(w http.ResponseWriter, r *http.Request) {
+	db, err := repository.OpenConnection()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Printf("Error while opening connection: %v", err)
+		return
+	}
+	defer db.Close()
+
+	repo := repository.NewBookSQLRepository(db)
+	useCase := usecases.NewFindBookByIDUseCase(repo)
+
+	idParam := chi.URLParam(r, "id")
+
+	var input usecases.FindBookByIDInput
+	input.ID = idParam
+
+	output, err := useCase.FindBookByID(input)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Printf("Error while getting book by id: %v", err)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(output)
+}
