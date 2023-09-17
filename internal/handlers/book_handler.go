@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/v5"
 	"github.com/gui-laranjeira/go-cleanarch/internal/infrastructure/repository"
 	usecases "github.com/gui-laranjeira/go-cleanarch/internal/usecases/book"
 )
