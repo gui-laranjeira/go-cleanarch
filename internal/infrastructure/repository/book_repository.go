@@ -66,15 +66,19 @@ func (r *BookSQLRepository) FindAll() ([]*entity.Book, error) {
 
 func (r *BookSQLRepository) FindByID(id string) (*entity.Book, error) {
 	sqlStatement := `SELECT * FROM books WHERE id_book = $1`
-	row := r.db.QueryRow(sqlStatement, id)
-
-	var book *entity.Book
-	err := row.Scan(&book.ID, &book.Title, &book.Author, &book.Pages, &book.Publisher, &book.Year, &book.ISBN, &book.CreatedAt, &book.UpdatedAt)
+	rows, err := r.db.Query(sqlStatement, id)
 	if err != nil {
 		return nil, err
 	}
 
-	return book, nil
+	var book entity.Book
+	for rows.Next() {
+		err = rows.Scan(&book.ID, &book.Title, &book.Author, &book.Pages, &book.Publisher, &book.Year, &book.ISBN, &book.CreatedAt, &book.UpdatedAt)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return &book, nil
 }
 
 func (r *BookSQLRepository) FindByAuthor(author string) ([]*entity.Book, error) {
