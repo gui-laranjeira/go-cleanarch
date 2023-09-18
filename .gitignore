@@ -17,3 +17,4 @@ go.work
 
 # Environment variables
 .env 
+config.toml
