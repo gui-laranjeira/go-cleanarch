@@ -134,3 +134,35 @@ func GetBookByIDHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(output)
 }
+
+func DeleteBookHandler(w http.ResponseWriter, r *http.Request) {
+	db, err := repository.OpenConnection()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Printf("Error while opening connection: %v", err)
+		return
+	}
+
+	repo := repository.NewBookSQLRepository(db)
+	usecase := usecases.NewDeleteBookUseCase(repo)
+
+	idParam := chi.URLParam(r, "id")
+
+	var input usecases.DeleteBookInput
+	input.ID = idParam
+
+	output, err := usecase.DeleteBook(input)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Printf("Error while deleting book: %v", err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(output)
+
+	if output.RowsAffected <= 0 {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+}

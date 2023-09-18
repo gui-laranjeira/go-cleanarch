@@ -26,6 +26,7 @@ type IBookRepository interface {
 	FindByTitle(title string) (*Book, error)
 	FindByAuthor(author string) ([]*Book, error)
 	FindByPublisher(publisher string) ([]*Book, error)
+	Delete(id string) (int64, error)
 }
 
 type IBookUseCase interface {

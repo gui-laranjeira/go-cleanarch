@@ -110,10 +110,17 @@ func (r *BookSQLRepository) FindByPublisher(publisher string) ([]*entity.Book, e
 	return nil, nil
 }
 
-func FindByAuthor(author string) ([]*entity.Book, error) {
-	return nil, nil
-}
+func (r *BookSQLRepository) Delete(id string) (int64, error) {
+	sqlStatement := `DELETE FROM books WHERE id_book = $1 RETURNING *`
+	result, err := r.db.Exec(sqlStatement, id)
+	if err != nil {
+		return 0, err
+	}
 
-func FindByPublisher(publisher string) ([]*entity.Book, error) {
-	return nil, nil
+	rows, err := result.RowsAffected()
+	if err != nil {
+		return 0, err
+	}
+
+	return rows, nil
 }
