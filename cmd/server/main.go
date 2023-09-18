@@ -21,6 +21,7 @@ func main() {
 		r.Get("/{id}", handlers.GetBookByIDHandler)
 		r.Post("/", handlers.CreateBookHandler)
 		r.Delete("/{id}", handlers.DeleteBookHandler)
+		r.Put("/{id}", handlers.UpdateBookHandler)
 	})
 
 	fmt.Println("Server is running on port :" + configs.GetPort())

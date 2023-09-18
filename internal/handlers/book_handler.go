@@ -166,3 +166,69 @@ func DeleteBookHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+func UpdateBookHandler(w http.ResponseWriter, r *http.Request) {
+	db, err := repository.OpenConnection()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Printf("Error while opening connection: %v", err)
+		return
+	}
+	repo := repository.NewBookSQLRepository(db)
+	usecase := usecases.NewUpdateBookUseCase(repo)
+
+	id := chi.URLParam(r, "id")
+
+	oldBook, err := repo.FindByID(id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusNotFound)
+		log.Printf("Book not found: %v", err)
+		return
+	}
+
+	var input usecases.UpdateBookInput
+	err = json.NewDecoder(r.Body).Decode(&input)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Printf("Error decoding request body: %v", err)
+		return
+	}
+
+	//#TODO Refactor this logic ->
+	input.ID = id
+	if input.Title == "" {
+		input.Title = oldBook.Title
+	}
+	if input.Author == "" {
+		input.Author = oldBook.Author
+	}
+	if input.Pages == 0 {
+		input.Pages = oldBook.Pages
+	}
+	if input.Publisher == "" {
+		input.Publisher = oldBook.Publisher
+	}
+	if input.Year == 0 {
+		input.Year = oldBook.Year
+	}
+	if input.ISBN == "" {
+		input.ISBN = oldBook.ISBN
+	}
+
+	output, err := usecase.UpdateBook(input)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Printf("Error while updating book: %v", err)
+		return
+	}
+
+	if output.RowsAffected <= 0 {
+		http.Error(w, "No rows affected", http.StatusNotFound)
+		log.Print("No rows affected")
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(output)
+}

@@ -20,7 +20,7 @@ type Book struct {
 
 type IBookRepository interface {
 	Create(book *Book) error
-	Update(book *Book, newBook *Book) error
+	Update(newBook *Book) (int64, error)
 	FindAll() ([]*Book, error)
 	FindByID(id string) (*Book, error)
 	FindByTitle(title string) (*Book, error)

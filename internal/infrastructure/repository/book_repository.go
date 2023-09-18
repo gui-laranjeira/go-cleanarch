@@ -39,8 +39,19 @@ func (r *BookSQLRepository) Create(book *entity.Book) error {
 	return nil
 }
 
-func (r *BookSQLRepository) Update(book *entity.Book, newBook *entity.Book) error {
-	return nil
+func (r *BookSQLRepository) Update(newBook *entity.Book) (int64, error) {
+	sqlStatement := `UPDATE books SET title = $1, author = $2, pages = $3, publisher = $4, year = $5, isbn = $6, updated_at = $7 WHERE id_book=$8`
+	rows, err := r.db.Exec(sqlStatement, newBook.Title, newBook.Author, newBook.Pages, newBook.Publisher, newBook.Year, newBook.ISBN, newBook.UpdatedAt, newBook.ID)
+	if err != nil {
+		return 0, err
+	}
+
+	rowsAffected, err := rows.RowsAffected()
+	if err != nil {
+		return 0, err
+	}
+
+	return rowsAffected, nil
 }
 
 func (r *BookSQLRepository) FindAll() ([]*entity.Book, error) {
