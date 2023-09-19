@@ -113,12 +113,46 @@ func (r *BookSQLRepository) FindByAuthor(author string) ([]*entity.Book, error) 
 	return books, nil
 }
 
-func (r *BookSQLRepository) FindByTitle(title string) (*entity.Book, error) {
-	return nil, nil
+func (r *BookSQLRepository) FindByTitle(title string) ([]*entity.Book, error) {
+	sqlStatement := `SELECT * FROM books WHERE title = $1`
+	rows, err := r.db.Query(sqlStatement, title)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var books []*entity.Book
+	for rows.Next() {
+		var book entity.Book
+		err = rows.Scan(&book.ID, &book.Title, &book.Author, &book.Pages, &book.Publisher, &book.Year, &book.ISBN, &book.CreatedAt, &book.UpdatedAt)
+		if err != nil {
+			return nil, err
+		}
+		books = append(books, &book)
+	}
+
+	return books, nil
 }
 
 func (r *BookSQLRepository) FindByPublisher(publisher string) ([]*entity.Book, error) {
-	return nil, nil
+	sqlStatement := `SELECT * FROM books WHERE publisher = $1`
+	rows, err := r.db.Query(sqlStatement, publisher)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var books []*entity.Book
+	for rows.Next() {
+		var book entity.Book
+		err = rows.Scan(&book.ID, &book.Title, &book.Author, &book.Pages, &book.Publisher, &book.Year, &book.ISBN, &book.CreatedAt, &book.UpdatedAt)
+		if err != nil {
+			return nil, err
+		}
+		books = append(books, &book)
+	}
+
+	return books, nil
 }
 
 func (r *BookSQLRepository) Delete(id string) (int64, error) {

@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/gui-laranjeira/go-cleanarch/internal/entity"
 	"github.com/gui-laranjeira/go-cleanarch/internal/infrastructure/repository"
 	usecases "github.com/gui-laranjeira/go-cleanarch/internal/usecases/book"
 )
@@ -52,58 +53,83 @@ func GetAllBooksHandler(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	repo := repository.NewBookSQLRepository(db)
-	useCase := usecases.NewFindAllBooksUseCase(repo)
 
-	output, err := useCase.FindAllBooks()
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusNotFound)
-		log.Printf("Error while getting all books: %v", err)
+	queryTitle := r.URL.Query().Get("title")
+	queryAuthor := r.URL.Query().Get("author")
+	queryPublisher := r.URL.Query().Get("publisher")
+
+	if queryTitle == "" && queryAuthor == "" && queryPublisher == "" {
+		useCase := usecases.NewFindAllBooksUseCase(repo)
+		output, err := useCase.FindAllBooks()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			log.Printf("Error while getting all books: %v", err)
+			return
+		}
+
+		w.WriteHeader(http.StatusOK)
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(output)
+		return
+	}
+
+	var books []*entity.Book
+
+	if queryTitle != "" {
+		useCase := usecases.NewFindBookByTitleUseCase(repo)
+
+		var input usecases.FindBookByTitleInput
+		input.Title = queryTitle
+
+		output, err := useCase.FindBookByTitle(input)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			log.Printf("Error while getting all books: %v", err)
+			return
+		}
+		books = append(books, output.Books...)
+	}
+
+	if queryAuthor != "" {
+		useCase := usecases.NewFindBookByAuthorUseCase(repo)
+
+		var input usecases.FindBookByAuthorInput
+		input.Author = queryAuthor
+
+		output, err := useCase.FindBookByAuthor(input)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			log.Printf("Error while getting all books: %v", err)
+			return
+		}
+		books = append(books, output.Books...)
+	}
+
+	if queryPublisher != "" {
+		useCase := usecases.NewFindBookByPublisherUseCase(repo)
+
+		var input usecases.FindBookByPublisherInput
+		input.Publisher = queryPublisher
+
+		output, err := useCase.FindBookByPublisher(input)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			log.Printf("Error while getting all books: %v", err)
+			return
+		}
+		books = append(books, output.Books...)
+	}
+
+	if len(books) <= 0 {
+		w.WriteHeader(http.StatusNotFound)
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode("No books found")
 		return
 	}
 
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(output)
-}
-
-func GetBookByAuthorHandler(w http.ResponseWriter, r *http.Request) {
-	db, err := repository.OpenConnection()
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		log.Printf("Error while opening connection: %v", err)
-		return
-	}
-	defer db.Close()
-
-	repo := repository.NewBookSQLRepository(db)
-	useCase := usecases.NewFindBookByAuthorUseCase(repo)
-
-	var input usecases.FindBookByAuthorInput
-
-	input.Author = chi.URLParam(r, "author")
-
-	if input.Author == "" || len(input.Author) == 0 {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		log.Printf("Error while decoding book: %v", err)
-		return
-	}
-
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		log.Printf("Error while decoding book: %v", err)
-		return
-	}
-
-	output, err := useCase.FindBookByAuthor(input)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		log.Printf("Error while getting book by author: %v", err)
-		return
-	}
-
-	w.WriteHeader(http.StatusOK)
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(output)
+	json.NewEncoder(w).Encode(books)
 }
 
 func GetBookByIDHandler(w http.ResponseWriter, r *http.Request) {

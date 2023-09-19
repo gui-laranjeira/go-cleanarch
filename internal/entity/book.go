@@ -23,7 +23,7 @@ type IBookRepository interface {
 	Update(newBook *Book) (int64, error)
 	FindAll() ([]*Book, error)
 	FindByID(id string) (*Book, error)
-	FindByTitle(title string) (*Book, error)
+	FindByTitle(title string) ([]*Book, error)
 	FindByAuthor(author string) ([]*Book, error)
 	FindByPublisher(publisher string) ([]*Book, error)
 	Delete(id string) (int64, error)

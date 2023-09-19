@@ -1,21 +1,15 @@
 package usecases
 
-import "github.com/gui-laranjeira/go-cleanarch/internal/entity"
+import (
+	"github.com/gui-laranjeira/go-cleanarch/internal/entity"
+)
 
 type FindBookByTitleInput struct {
 	Title string `json:"title"`
 }
 
 type FindBookByTitleOutput struct {
-	ID        string `json:"id_book"`
-	Title     string `json:"title"`
-	Author    string `json:"author"`
-	Pages     int    `json:"pages"`
-	Publisher string `json:"publisher"`
-	Year      int    `json:"year"`
-	ISBN      string `json:"isbn"`
-	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
+	Books []*entity.Book
 }
 
 type IFindBookByTitleUseCase interface {
@@ -33,20 +27,12 @@ func NewFindBookByTitleUseCase(bookRepository entity.IBookRepository) IFindBookB
 }
 
 func (f *findbookByTitle) FindBookByTitle(input FindBookByTitleInput) (*FindBookByTitleOutput, error) {
-	book, err := f.bookRepository.FindByTitle(input.Title)
+	books, err := f.bookRepository.FindByTitle(input.Title)
 	if err != nil {
 		return nil, err
 	}
 
 	return &FindBookByTitleOutput{
-		ID:        book.ID.String(),
-		Title:     book.Title,
-		Author:    book.Author,
-		Pages:     book.Pages,
-		Publisher: book.Publisher,
-		Year:      book.Year,
-		ISBN:      book.ISBN,
-		CreatedAt: book.CreatedAt.String(),
-		UpdatedAt: book.UpdatedAt.String(),
+		Books: books,
 	}, nil
 }
