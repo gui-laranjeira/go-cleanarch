@@ -10,16 +10,15 @@ A Library API developed to practice clean architecture with Golang. Feel free to
 # Prefer to use make
 $ make run
 
-# but you can run the regular entrypoint go run cmd/server/main.go
-$ go run cmd/server/main.go
 ```
 
 ### Main Functionalities
- - [ ] Manage books database (inserting, updating, deleting and getting books from it)
+ - [X] Manage books database (inserting, updating, deleting and getting books from it)
  - [ ] Manage current book stock (how many books of each title and who borrowed them)
  - [ ] Manage library customers (keep track of all the books someone has borrowed)
 
 ### TODO 
+ - [ ] Config docker compose to run postgres and the app
  - [ ] JWT authentication and authorization
  - [ ] Roles for admins (manage the system) and users (search for books)
  - [ ] Universal configuration file, independent of entrypoint used
