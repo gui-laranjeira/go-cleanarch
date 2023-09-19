@@ -22,4 +22,4 @@ $ make run
  - [ ] JWT authentication and authorization
  - [ ] Roles for admins (manage the system) and users (search for books)
  - [ ] Universal configuration file, independent of entrypoint used
- - [ ] Only search titles, authors and publishers with exact name, must fix to select when contains substrings too
+ - [X] Only search titles, authors and publishers with exact name, must fix to select when contains substrings too
