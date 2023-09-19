@@ -2,6 +2,7 @@ package repository
 
 import (
 	"database/sql"
+	"strings"
 
 	"github.com/gui-laranjeira/go-cleanarch/internal/entity"
 	repository "github.com/gui-laranjeira/go-cleanarch/internal/infrastructure/repository/errors"
@@ -93,7 +94,8 @@ func (r *BookSQLRepository) FindByID(id string) (*entity.Book, error) {
 }
 
 func (r *BookSQLRepository) FindByAuthor(author string) ([]*entity.Book, error) {
-	sqlStatement := `SELECT * FROM books WHERE author = $1`
+	sqlStatement := `SELECT * FROM books WHERE UPPER(author) LIKE UPPER($1)`
+	author = "%" + strings.ToUpper(author) + "%"
 	rows, err := r.db.Query(sqlStatement, author)
 	if err != nil {
 		return nil, err
@@ -114,7 +116,8 @@ func (r *BookSQLRepository) FindByAuthor(author string) ([]*entity.Book, error) 
 }
 
 func (r *BookSQLRepository) FindByTitle(title string) ([]*entity.Book, error) {
-	sqlStatement := `SELECT * FROM books WHERE title = $1`
+	sqlStatement := `SELECT * FROM books WHERE UPPER(title) LIKE UPPER($1)`
+	title = "%" + strings.ToUpper(title) + "%"
 	rows, err := r.db.Query(sqlStatement, title)
 	if err != nil {
 		return nil, err
@@ -135,7 +138,8 @@ func (r *BookSQLRepository) FindByTitle(title string) ([]*entity.Book, error) {
 }
 
 func (r *BookSQLRepository) FindByPublisher(publisher string) ([]*entity.Book, error) {
-	sqlStatement := `SELECT * FROM books WHERE publisher = $1`
+	sqlStatement := `SELECT * FROM books WHERE UPPER(publisher) LIKE UPPER($1)`
+	publisher = "%" + strings.ToUpper(publisher) + "%"
 	rows, err := r.db.Query(sqlStatement, publisher)
 	if err != nil {
 		return nil, err
