@@ -8,25 +8,28 @@ import (
 )
 
 type User struct {
-	ID        uuid.UUID `json:"id_user"`
-	Email     string    `json:"email"`
-	Password  string    `json:"password"`
-	FirstName string    `json:"first_name"`
-	LastName  string    `json:"last_name"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
-	Books     []Book    `json:"books"`
+	ID            uuid.UUID  `json:"id_user"`
+	Email         string     `json:"email"`
+	Phone         string     `json:"phone"`
+	Password      string     `json:"password"`
+	FirstName     string     `json:"first_name"`
+	LastName      string     `json:"last_name"`
+	CreatedAt     time.Time  `json:"created_at"`
+	UpdatedAt     time.Time  `json:"updated_at"`
+	Books         []*Book    `json:"books"`
+	CurrentBookID *uuid.UUID `json:"current_book_id"`
 }
 
 type IUserRepository interface {
 	Create(user *User) error
-	Update(user *User, newUser *User) error
+	Update(newUser *User) (int64, error)
 	Login(email string, password string) (*User, error)
+	ChangePassword(id string, newPassword string) (int64, error)
 	BorrowBook(user *User, book *Book) error
 	ReturnBook(user *User, book *Book) error
 }
 
-func NewUserFactory(email string, password string, firstName string, lastName string) (*User, error) {
+func NewUserFactory(email string, phone string, password string, firstName string, lastName string) (*User, error) {
 	err := validadePassword(password)
 	if err != nil {
 		return nil, err
@@ -38,12 +41,16 @@ func NewUserFactory(email string, password string, firstName string, lastName st
 	}
 
 	r := User{
-		ID:        uuid.New(),
-		Email:     email,
-		Password:  string(hash),
-		FirstName: firstName,
-		LastName:  lastName,
-		CreatedAt: time.Now(),
+		ID:            uuid.New(),
+		Email:         email,
+		Phone:         phone,
+		Password:      string(hash),
+		FirstName:     firstName,
+		LastName:      lastName,
+		CreatedAt:     time.Now(),
+		UpdatedAt:     time.Time{},
+		Books:         make([]*Book, 5),
+		CurrentBookID: nil,
 	}
 
 	err = r.validateUser()

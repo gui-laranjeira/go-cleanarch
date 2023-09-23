@@ -4,6 +4,7 @@ import "github.com/gui-laranjeira/go-cleanarch/internal/entity"
 
 type CreateUserInput struct {
 	Email     string
+	Phone     string
 	Password  string
 	FirstName string
 	LastName  string
@@ -28,7 +29,7 @@ func NewCreateUserUseCase(userRepository entity.IUserRepository) ICreateUserUseC
 }
 
 func (c *createUserUseCase) CreateUser(input CreateUserInput) error {
-	user, err := entity.NewUserFactory(input.Email, input.Password, input.FirstName, input.LastName)
+	user, err := entity.NewUserFactory(input.Email, input.Phone, input.Password, input.FirstName, input.LastName)
 	if err != nil {
 		return nil
 	}
