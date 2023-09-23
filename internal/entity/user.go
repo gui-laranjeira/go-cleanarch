@@ -25,8 +25,8 @@ type IUserRepository interface {
 	Update(newUser *User) (int64, error)
 	Login(email string, password string) (*User, error)
 	ChangePassword(id string, newPassword string) (int64, error)
-	BorrowBook(user *User, book *Book) error
-	ReturnBook(user *User, book *Book) error
+	BorrowBook(user_id string, book_id string) error
+	ReturnBook(user_id string, book_id string) error
 }
 
 func NewUserFactory(email string, phone string, password string, firstName string, lastName string) (*User, error) {
