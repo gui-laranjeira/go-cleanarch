@@ -11,17 +11,17 @@ type IReturnBookUsecase interface {
 	ReturnBook(ReturnBookUsecaseInput) error
 }
 
-type ReturnBookUsecase struct {
+type returnBookUsecase struct {
 	userRepository entity.IUserRepository
 }
 
 func NewReturnBookUseCase(userRepository entity.IUserRepository) IReturnBookUsecase {
-	return &ReturnBookUsecase{
+	return &returnBookUsecase{
 		userRepository: userRepository,
 	}
 }
 
-func (u *ReturnBookUsecase) ReturnBook(input ReturnBookUsecaseInput) error {
+func (u *returnBookUsecase) ReturnBook(input ReturnBookUsecaseInput) error {
 	err := u.userRepository.ReturnBook(input.UserID, input.BookID)
 	if err != nil {
 		return err
