@@ -62,7 +62,7 @@ func NewUserFactory(email string, phone string, password string, firstName strin
 }
 
 func (u *User) validateUser() error {
-	if u.Email == "" || u.Password == "" || u.FirstName == "" || u.LastName == "" || u.CreatedAt.String() == "" {
+	if u.Email == "" || u.Phone == "" || u.Password == "" || u.FirstName == "" || u.LastName == "" || u.CreatedAt.String() == "" {
 		return ErrInvalidEntity
 	}
 	return nil

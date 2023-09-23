@@ -11,6 +11,7 @@ import (
 func TestNewUser(t *testing.T) {
 	type test struct {
 		email      string
+		phone      string
 		password   string
 		first_name string
 		last_name  string
@@ -20,6 +21,7 @@ func TestNewUser(t *testing.T) {
 	tests := []test{
 		{
 			email:      "teste@teste.com",
+			phone:      "11999999999",
 			password:   "123456",
 			first_name: "Gui",
 			last_name:  "Laranjeira",
@@ -28,6 +30,7 @@ func TestNewUser(t *testing.T) {
 		},
 		{
 			email:      "",
+			phone:      "11999999999",
 			password:   "123456",
 			first_name: "Gui",
 			last_name:  "Laranjeira",
@@ -36,6 +39,16 @@ func TestNewUser(t *testing.T) {
 		},
 		{
 			email:      "teste@teste.com",
+			phone:      "",
+			password:   "123456",
+			first_name: "Gui",
+			last_name:  "Laranjeira",
+			created_at: time.Now(),
+			expect:     entity.ErrInvalidEntity,
+		},
+		{
+			email:      "teste@teste.com",
+			phone:      "11999999999",
 			password:   "",
 			first_name: "Gui",
 			last_name:  "Laranjeira",
@@ -44,6 +57,7 @@ func TestNewUser(t *testing.T) {
 		},
 		{
 			email:      "teste@teste.com",
+			phone:      "11999999999",
 			password:   "123456",
 			first_name: "",
 			last_name:  "Laranjeira",
@@ -52,6 +66,7 @@ func TestNewUser(t *testing.T) {
 		},
 		{
 			email:      "teste@teste.com",
+			phone:      "11999999999",
 			password:   "123456",
 			first_name: "Gui",
 			last_name:  "",
@@ -60,6 +75,7 @@ func TestNewUser(t *testing.T) {
 		},
 		{
 			email:      "teste@teste.com",
+			phone:      "11999999999",
 			password:   "",
 			first_name: "Gui",
 			last_name:  "Laranjeira",
@@ -68,7 +84,7 @@ func TestNewUser(t *testing.T) {
 	}
 
 	for _, tc := range tests {
-		_, err := entity.NewUserFactory(tc.email, tc.password, tc.first_name, tc.last_name)
+		_, err := entity.NewUserFactory(tc.email, tc.phone, tc.password, tc.first_name, tc.last_name)
 		assert.Equal(t, tc.expect, err)
 	}
 }
