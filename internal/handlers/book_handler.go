@@ -7,12 +7,14 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/gui-laranjeira/go-cleanarch/internal/entity"
+	"github.com/gui-laranjeira/go-cleanarch/internal/infrastructure/db"
 	"github.com/gui-laranjeira/go-cleanarch/internal/infrastructure/repository"
+
 	usecases "github.com/gui-laranjeira/go-cleanarch/internal/usecases/book"
 )
 
 func CreateBookHandler(w http.ResponseWriter, r *http.Request) {
-	db, err := repository.OpenConnection()
+	db, err := db.OpenConnection()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		log.Printf("Error while opening connection: %v", err)
@@ -44,7 +46,7 @@ func CreateBookHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetAllBooksHandler(w http.ResponseWriter, r *http.Request) {
-	db, err := repository.OpenConnection()
+	db, err := db.OpenConnection()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		log.Printf("Error while opening connection: %v", err)
@@ -133,7 +135,7 @@ func GetAllBooksHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetBookByIDHandler(w http.ResponseWriter, r *http.Request) {
-	db, err := repository.OpenConnection()
+	db, err := db.OpenConnection()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		log.Printf("Error while opening connection: %v", err)
@@ -162,7 +164,7 @@ func GetBookByIDHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteBookHandler(w http.ResponseWriter, r *http.Request) {
-	db, err := repository.OpenConnection()
+	db, err := db.OpenConnection()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		log.Printf("Error while opening connection: %v", err)
@@ -194,7 +196,7 @@ func DeleteBookHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateBookHandler(w http.ResponseWriter, r *http.Request) {
-	db, err := repository.OpenConnection()
+	db, err := db.OpenConnection()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		log.Printf("Error while opening connection: %v", err)
