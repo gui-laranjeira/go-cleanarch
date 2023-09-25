@@ -7,17 +7,17 @@ import (
 )
 
 type Costumer struct {
-	ID            uuid.UUID  `json:"id_costumer"`
-	Email         string     `json:"email"`
-	Phone         string     `json:"phone"`
-	Adress        string     `json:"adress"`
-	Document      string     `json:"document"`
-	FirstName     string     `json:"first_name"`
-	LastName      string     `json:"last_name"`
-	CreatedAt     time.Time  `json:"created_at"`
-	UpdatedAt     time.Time  `json:"updated_at"`
-	Books         []*Book    `json:"books"`
-	CurrentBookID *uuid.UUID `json:"current_book_id"`
+	ID            uuid.UUID   `json:"id_costumer"`
+	Email         string      `json:"email"`
+	Phone         string      `json:"phone"`
+	Adress        string      `json:"adress"`
+	Document      string      `json:"document"`
+	FirstName     string      `json:"first_name"`
+	LastName      string      `json:"last_name"`
+	CreatedAt     time.Time   `json:"created_at"`
+	UpdatedAt     time.Time   `json:"updated_at"`
+	Books         []uuid.UUID `json:"books"`
+	CurrentBookID *uuid.UUID  `json:"current_book_id"`
 }
 
 type ICostumerRepository interface {
@@ -38,7 +38,7 @@ func NewCostumerFactory(email string, phone string, adress string, document stri
 		LastName:      lastName,
 		CreatedAt:     time.Now(),
 		UpdatedAt:     time.Time{},
-		Books:         make([]*Book, 5),
+		Books:         make([]uuid.UUID, 5),
 		CurrentBookID: nil,
 	}
 
