@@ -3,8 +3,8 @@ package usecases
 import "github.com/gui-laranjeira/go-cleanarch/internal/entity"
 
 type ReturnBookUsecaseInput struct {
-	UserID string
-	BookID string
+	CostumerID string
+	BookID     string
 }
 
 type IReturnBookUsecase interface {
@@ -12,17 +12,17 @@ type IReturnBookUsecase interface {
 }
 
 type returnBookUsecase struct {
-	userRepository entity.IUserRepository
+	costumerRepository entity.ICostumerRepository
 }
 
-func NewReturnBookUseCase(userRepository entity.IUserRepository) IReturnBookUsecase {
+func NewReturnBookUseCase(costumerRepository entity.ICostumerRepository) IReturnBookUsecase {
 	return &returnBookUsecase{
-		userRepository: userRepository,
+		costumerRepository: costumerRepository,
 	}
 }
 
 func (u *returnBookUsecase) ReturnBook(input ReturnBookUsecaseInput) error {
-	err := u.userRepository.ReturnBook(input.UserID, input.BookID)
+	err := u.costumerRepository.ReturnBook(input.CostumerID, input.BookID)
 	if err != nil {
 		return err
 	}

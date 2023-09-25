@@ -8,16 +8,14 @@ import (
 )
 
 type User struct {
-	ID            uuid.UUID  `json:"id_user"`
-	Email         string     `json:"email"`
-	Phone         string     `json:"phone"`
-	Password      string     `json:"password"`
-	FirstName     string     `json:"first_name"`
-	LastName      string     `json:"last_name"`
-	CreatedAt     time.Time  `json:"created_at"`
-	UpdatedAt     time.Time  `json:"updated_at"`
-	Books         []*Book    `json:"books"`
-	CurrentBookID *uuid.UUID `json:"current_book_id"`
+	ID        uuid.UUID `json:"id_user"`
+	Email     string    `json:"email"`
+	Phone     string    `json:"phone"`
+	Password  string    `json:"password"`
+	FirstName string    `json:"first_name"`
+	LastName  string    `json:"last_name"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 type IUserRepository interface {
@@ -25,8 +23,6 @@ type IUserRepository interface {
 	Update(newUser *User) (int64, error)
 	Login(email string, password string) (*User, error)
 	ChangePassword(id string, newPassword string) (int64, error)
-	BorrowBook(user_id string, book_id string) error
-	ReturnBook(user_id string, book_id string) error
 }
 
 func NewUserFactory(email string, phone string, password string, firstName string, lastName string) (*User, error) {
@@ -41,16 +37,14 @@ func NewUserFactory(email string, phone string, password string, firstName strin
 	}
 
 	r := User{
-		ID:            uuid.New(),
-		Email:         email,
-		Phone:         phone,
-		Password:      string(hash),
-		FirstName:     firstName,
-		LastName:      lastName,
-		CreatedAt:     time.Now(),
-		UpdatedAt:     time.Time{},
-		Books:         make([]*Book, 5),
-		CurrentBookID: nil,
+		ID:        uuid.New(),
+		Email:     email,
+		Phone:     phone,
+		Password:  string(hash),
+		FirstName: firstName,
+		LastName:  lastName,
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Time{},
 	}
 
 	err = r.validateUser()
