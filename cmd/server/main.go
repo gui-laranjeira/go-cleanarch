@@ -24,6 +24,12 @@ func main() {
 		r.Put("/{id}", handlers.UpdateBookHandler)
 	})
 
+	r.Route("/api/v1/users", func(r chi.Router) {
+		r.Post("/", handlers.CreateUserHandler)
+		r.Put("/{id}", handlers.UpdateUserHandler)
+		r.Patch("/secret/{id}", handlers.UpdatePasswordHandler)
+	})
+
 	fmt.Println("Server is running on port :" + configs.GetPort())
 	http.ListenAndServe(fmt.Sprintf(":%s", configs.GetPort()), r)
 }

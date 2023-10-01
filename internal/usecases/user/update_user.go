@@ -8,11 +8,11 @@ import (
 )
 
 type UpdateUserInput struct {
-	ID        string
-	Email     string
-	Phone     string
-	FirstName string
-	LastName  string
+	ID        string `json:"id_user"`
+	Email     string `json:"email"`
+	Phone     string `json:"phone"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
 }
 
 type UpdateUserOutput struct {
@@ -34,7 +34,7 @@ func NewUpdateUserUseCase(userRepository entity.IUserRepository) IUpdateUserUseC
 }
 
 func (u *updateUseruseCase) UpdateUser(input UpdateUserInput) (*UpdateUserOutput, error) {
-	newUser, err := entity.NewUserFactory(input.Email, input.Phone, "", input.FirstName, input.LastName)
+	newUser, err := entity.NewUserFactory(input.Email, input.Phone, "123456", input.FirstName, input.LastName)
 	if err != nil {
 		return nil, err
 	}
