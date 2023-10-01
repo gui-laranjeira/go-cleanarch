@@ -20,6 +20,6 @@ $ make run
 ### TODO 
  - [ ] Config docker compose to run postgres and the app
  - [ ] JWT authentication and authorization
- - [ ] Roles for admins (manage the system) and users (search for books)
+ - [ ] Roles for users (authentication needed) and costumers (no authentication needed)
  - [ ] Universal configuration file, independent of entrypoint used
  - [X] Only search titles, authors and publishers with exact name, must fix to select when contains substrings too
