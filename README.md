@@ -3,13 +3,13 @@
 A Library API developed to practice clean architecture with Golang. Feel free to suggest changes and give your opinion on the code, constructive criticism is always welcome
 --- 
 ### What am I using
- - Chi + Postgres + Docker + Clean Architecture (literally Uncle Bob's book)
+ - Chi + Viper + Postgres + Docker + Clean Architecture (literally Uncle Bob's book)
 
 ### How to run
-```sh
-# Prefer to use make
-$ make run
 
+The first step is to create a config.toml file following the example with the database environment variables. After that, just run:
+```sh
+$ make run
 ```
 
 ### Main Functionalities
