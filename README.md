@@ -3,13 +3,13 @@
 A Library API developed to practice clean architecture with Golang. Feel free to suggest changes and give your opinion on the code, constructive criticism is always welcome
 --- 
 ### What am I using
- - Chi + Postgres + Docker + Clean Architecture (literally Uncle Bob's book)
+ - Chi + Viper + Postgres + Docker + Clean Architecture (literally Uncle Bob's book)
 
 ### How to run
-```sh
-# Prefer to use make
-$ make run
 
+The first step is to create a config.toml file following the example with the database environment variables. After that, just run:
+```sh
+$ make run
 ```
 
 ### Main Functionalities
@@ -20,6 +20,6 @@ $ make run
 ### TODO 
  - [ ] Config docker compose to run postgres and the app
  - [ ] JWT authentication and authorization
- - [ ] Roles for admins (manage the system) and users (search for books)
+ - [ ] Roles for users (authentication needed) and costumers (no authentication needed)
  - [ ] Universal configuration file, independent of entrypoint used
  - [X] Only search titles, authors and publishers with exact name, must fix to select when contains substrings too
