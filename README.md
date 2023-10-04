@@ -16,6 +16,7 @@ $ make run
  - [X] Manage books database (inserting, updating, deleting and getting books from it)
  - [ ] Manage current book stock (how many books of each title and who borrowed them)
  - [ ] Manage library customers (keep track of all the books someone has borrowed)
+ - [ ] Browse books (costumer role)
 
 ### TODO 
  - [ ] Config docker compose to run postgres and the app
