@@ -11,11 +11,19 @@ import (
 
 func OpenConnection() (*sql.DB, error) {
 	cfg := configs.GetDB()
-	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", cfg.Host, cfg.Port, cfg.User, cfg.Pass, cfg.Database)
+
+	// TODO handle connection string inside code
+
+	// localhost connection string
+	// connStr := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable", cfg.User, cfg.Pass, cfg.Host, cfg.Port, cfg.Database)
+
+	// container connection string
+	connStr := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable", cfg.User, cfg.Pass, cfg.Container, cfg.Port, cfg.Database)
 
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
-		log.Fatalf("%s", err)
+		log.Fatalf("Error openning connection with postgres: %v", err)
+
 	}
 
 	err = db.Ping()

@@ -8,9 +8,13 @@ services:
       ports:
         - 8080:8080
       restart: unless-stopped
+      depends_on:
+        - postgresdb
+      networks:
+        - backend
 
 ## TODO app running in container is not connecting to database, connection refused, need to solve that
-    postgres:
+    postgresdb:
         image: postgres:16.0
         container_name: pgcontainer
         restart: always
@@ -30,6 +34,9 @@ services:
           # copy the sql script to create tables
           - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
           - ./sql/insert_values.sql:/docker-entrypoint-initdb.d/insert_values.sql
+        networks:
+          - backend
 
-# volumes:
-#     pgdata:
+networks:
+  backend:
+    driver: bridge
