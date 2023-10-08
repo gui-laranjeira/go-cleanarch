@@ -1,11 +1,7 @@
 FROM golang:1.21 as builder
 
-
-ENV PORT 9000
-
 WORKDIR /app
 
-# Dependencies
 COPY go.mod go.sum ./
 RUN go mod tidy
 
