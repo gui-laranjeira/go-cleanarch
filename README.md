@@ -10,11 +10,12 @@ A Library API developed to practice clean architecture with Golang. Feel free to
 The first step is to create a config.toml file following the example with the database environment variables. And edit the connection string in connection.go file to match your run option: docker or make. Docker use the container host and make use localhost, still working on a better solution for this problem.
 
 You can run using docker: 
+
 ```sh
 $ docker compose up
 ```
 
-After that, just run:
+AIf yhou prefer make, you just need to set up the database locally:
 
 ```sh
 $ make run
