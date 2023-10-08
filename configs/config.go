@@ -34,6 +34,9 @@ func init() {
 func Load() error {
 	viper.SetConfigName("config")
 	viper.SetConfigType("toml")
+	viper.AddConfigPath("../../")
+	viper.AddConfigPath("/app/")
+	viper.AddConfigPath("/cmd/server")
 	wd, err := os.Getwd()
 	if err != nil {
 		return err
