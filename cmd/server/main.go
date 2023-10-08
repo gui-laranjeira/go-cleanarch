@@ -16,6 +16,8 @@ func main() {
 	}
 
 	r := chi.NewRouter()
+	r.Get("/api/v1/ping", handlers.HealthCheckHandler)
+
 	r.Route("/api/v1/books", func(r chi.Router) {
 		r.Get("/", handlers.GetAllBooksHandler)
 		r.Get("/{id}", handlers.GetBookByIDHandler)
