@@ -1,25 +1,20 @@
 package entity
 
 import (
-	"time"
-
 	"github.com/google/uuid"
 )
 
 type StockEntry struct {
-	Book_ID    uuid.UUID `json:"id_book"`
-	Stock_ID   uuid.UUID `json:"id_stock"`
-	User_ID    uuid.UUID `json:"id_user"`
-	Avaiable   bool      `json:"avaiable"`
-	BorrowDate time.Time `json:"borrow_date"`
-	ReturnDate time.Time `json:"return_date"`
+	BookID    uuid.UUID `json:"id_book"`
+	StockID   uuid.UUID `json:"id_stock"`
+	Available string    `json:"avaiable"`
 }
 
-func NewStockEntryFactory(book_id uuid.UUID, avaiable bool) (*StockEntry, error) {
+func NewStockEntryFactory(book_id uuid.UUID, available string) (*StockEntry, error) {
 	r := StockEntry{
-		Book_ID:  book_id,
-		Stock_ID: uuid.New(),
-		Avaiable: avaiable,
+		BookID:    book_id,
+		StockID:   uuid.New(),
+		Available: available,
 	}
 
 	err := r.validateStockEntry()
@@ -31,7 +26,7 @@ func NewStockEntryFactory(book_id uuid.UUID, avaiable bool) (*StockEntry, error)
 }
 
 func (s *StockEntry) validateStockEntry() error {
-	if s.Book_ID.String() == "" || s.Stock_ID.String() == "" {
+	if s.BookID.String() == "" || s.StockID.String() == "" {
 		return ErrInvalidEntity
 	}
 	return nil
