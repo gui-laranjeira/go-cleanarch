@@ -1,6 +1,6 @@
 -- Creation of books table
 CREATE TABLE IF NOT EXISTS books (
-  id_book VARCHAR1(100) NOT NULL,
+  id_book VARCHAR(100) NOT NULL,
   title VARCHAR(100) NOT NULL,
   author VARCHAR(50) NOT NULL,
   pages INT NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS costumers (
   id_costumer VARCHAR(100) NOT NULL,
   email VARCHAR(50) NOT NULL,
   phone VARCHAR(20) NOT NULL,
-  adress VARCHAR(100) NOT NULL,
+  address VARCHAR(100) NOT NULL,
   document VARCHAR(50) NOT NULL,
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
