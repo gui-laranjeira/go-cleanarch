@@ -22,17 +22,17 @@ type IFindBookByIDUseCase interface {
 	FindBookByID(input FindBookByIDInput) (*FindBookByIDOutput, error)
 }
 
-type findbookByID struct {
+type findBookByID struct {
 	bookRepository entity.IBookRepository
 }
 
 func NewFindBookByIDUseCase(bookRepository entity.IBookRepository) IFindBookByIDUseCase {
-	return &findbookByID{
+	return &findBookByID{
 		bookRepository: bookRepository,
 	}
 }
 
-func (f *findbookByID) FindBookByID(input FindBookByIDInput) (*FindBookByIDOutput, error) {
+func (f *findBookByID) FindBookByID(input FindBookByIDInput) (*FindBookByIDOutput, error) {
 	book, err := f.bookRepository.FindByID(input.ID)
 	if err != nil {
 		return nil, err
