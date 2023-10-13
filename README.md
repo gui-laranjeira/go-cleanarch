@@ -8,7 +8,7 @@ A Library API developed to practice clean architecture with Golang. Feel free to
 ### How to run
 
 - The first step is to create a config.toml file following the example with the database environment variables. 
-- After that edit the connection string in connection.go file to match your run option: docker or make. (Docker use the container host and make use localhost, still working on a better solution for this problem.)
+- After that edit the connection string in `/internal/infrastructure/db/connection.go` file to match your run option: docker or make. (Docker use the container host and make use localhost, still working on a better solution for this problem.)
 
 You can run using docker: 
 
