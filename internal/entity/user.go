@@ -23,6 +23,8 @@ type IUserRepository interface {
 	Update(newUser *User) (int64, error)
 	Login(email string, password string) (*User, error)
 	ChangePassword(id string, newPassword string) (int64, error)
+	GetAllUsers() ([]*User, error)
+	GetUserByID(id string) (*User, error)
 }
 
 func NewUserFactory(email string, phone string, password string, firstName string, lastName string) (*User, error) {

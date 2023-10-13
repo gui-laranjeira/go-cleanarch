@@ -27,7 +27,9 @@ func main() {
 	})
 
 	r.Route("/api/v1/users", func(r chi.Router) {
+		r.Get("/", handlers.GetAllUsersHandler)
 		r.Post("/", handlers.CreateUserHandler)
+		r.Get("/{id}", handlers.GetUserByIDHandler)
 		r.Put("/{id}", handlers.UpdateUserHandler)
 		r.Patch("/secret/{id}", handlers.UpdatePasswordHandler)
 	})

@@ -15,10 +15,10 @@ func OpenConnection() (*sql.DB, error) {
 	// TODO handle connection string inside code
 
 	// localhost connection string
-	// connStr := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable", cfg.User, cfg.Pass, cfg.Host, cfg.Port, cfg.Database)
+	connStr := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable", cfg.User, cfg.Pass, cfg.Host, cfg.Port, cfg.Database)
 
 	// container connection string
-	connStr := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable", cfg.User, cfg.Pass, cfg.Container, cfg.Port, cfg.Database)
+	// connStr := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable", cfg.User, cfg.Pass, cfg.Container, cfg.Port, cfg.Database)
 
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {

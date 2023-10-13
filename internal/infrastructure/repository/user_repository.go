@@ -73,3 +73,42 @@ func (r *UserSQLRepository) ChangePassword(id string, newPassword string) (int64
 
 	return rowsAffected, err
 }
+
+func (r *UserSQLRepository) GetAllUsers() ([]*entity.User, error) {
+	sqlStatement := `SELECT id_user, email, phone, first_name, last_name, created_at, updated_at FROM users`
+	rows, err := r.db.Query(sqlStatement)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var users []*entity.User
+	for rows.Next() {
+		var user entity.User
+		err = rows.Scan(&user.ID, &user.Email, &user.Phone, &user.FirstName, &user.LastName, &user.CreatedAt, &user.UpdatedAt)
+		if err != nil {
+			return nil, err
+		}
+		users = append(users, &user)
+	}
+
+	return users, nil
+}
+
+func (r *UserSQLRepository) GetUserByID(id string) (*entity.User, error) {
+	sql := `SELECT id_user, email, phone, first_name, last_name, created_at, updated_at FROM users WHERE id_user = $1`
+	rows, err := r.db.Query(sql, id)
+	if err != nil {
+		return nil, err
+	}
+
+	var user entity.User
+	for rows.Next() {
+		err = rows.Scan(&user.ID, &user.Email, &user.Phone, &user.FirstName, &user.LastName, &user.CreatedAt, &user.UpdatedAt)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return &user, nil
+}
