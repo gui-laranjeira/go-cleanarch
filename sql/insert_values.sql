@@ -9,4 +9,6 @@ INSERT INTO public.books (id_book,title,author,pages,publisher,"year",isbn,creat
 INSERT INTO users (id_user,email,phone,"password",first_name,last_name,created_at,updated_at) VALUES
 	 ('a4ce9866-c04e-4026-8ea9-d6adf761e2b8','teste2@teste.com','987654321','$2a$10$0C4yIL1XxxxhYqnCtsSfF./Ls.uuMLxh5NrFsnFt71945baHSLTvW','Maria','Santo','2023-10-12 21:10:34.679668','0001-01-01 00:00:00'),
 	 ('a4494950-e5f9-4139-8d5e-de498cfcf08b','teste@teste.com','987654321','$2a$10$XTbSu2UgADI8ydhBKWRk4eXqmcNKpCLjrxQz/NvXkONt7t9gRov0q','John','Doe','2023-10-12 21:10:43.495739','0001-01-01 00:00:00');
-	 
+
+INSERT INTO costumers (id_costumer,email,phone,address,"document",first_name,last_name,created_at,updated_at,current_book_id) VALUES
+	 ('14d6c480-328f-4db9-aae4-aa82136b54de','teste@teste.com','987654321','R. das Pedras, 1','101001001','Antonia','Teste','2023-10-14 23:18:02.05326','0001-01-01 00:00:00',NULL);
