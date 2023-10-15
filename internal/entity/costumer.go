@@ -37,7 +37,6 @@ func NewCostumerFactory(email string, phone string, address string, document str
 		LastName:      lastName,
 		CreatedAt:     time.Now(),
 		UpdatedAt:     time.Time{},
-		Books:         make([]uuid.UUID, 5),
 		CurrentBookID: nil,
 	}
 
