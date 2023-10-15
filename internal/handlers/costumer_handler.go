@@ -49,6 +49,15 @@ func UpdateCostumerHandler(w http.ResponseWriter, r *http.Request) {
 	repo := repository.NewCostumerSQLRepository(db)
 	uc := usecases.NewUpdateCostumerUseCase(repo)
 
+	id := chi.URLParam(r, "id")
+
+	oldData, err := repo.FindByID(id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusNotFound)
+		log.Printf("Costumer not found: %v", err)
+		return
+	}
+
 	var input usecases.UpdateCostumerInput
 	err = json.NewDecoder(r.Body).Decode(&input)
 	if err != nil {
@@ -57,7 +66,26 @@ func UpdateCostumerHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	input.ID = chi.URLParam(r, "id")
+	//#TODO Refactor
+	input.ID = id
+	if input.Email == "" {
+		input.Email = oldData.Email
+	}
+	if input.Phone == "" {
+		input.Phone = oldData.Phone
+	}
+	if input.Address == "" {
+		input.Address = oldData.Address
+	}
+	if input.Document == "" {
+		input.Document = oldData.Document
+	}
+	if input.FirstName == "" {
+		input.FirstName = oldData.FirstName
+	}
+	if input.LastName == "" {
+		input.LastName = oldData.LastName
+	}
 
 	output, err := uc.UpdateCostumer(input)
 	if err != nil {

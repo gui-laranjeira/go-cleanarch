@@ -61,7 +61,7 @@ func UpdateUserHandler(w http.ResponseWriter, r *http.Request) {
 	err = json.NewDecoder(r.Body).Decode(&input)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-		log.Printf("Error while deconding request body: %v", err)
+		log.Printf("Error while decoding request body: %v", err)
 		return
 	}
 	input.ID = id

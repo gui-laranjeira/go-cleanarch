@@ -8,13 +8,13 @@ import (
 )
 
 type UpdateCostumerInput struct {
-	ID        string
-	Email     string
-	Phone     string
-	Adress    string
-	Document  string
-	FirstName string
-	LastName  string
+	ID        string `json:"id_costumer"`
+	Email     string `json:"email"`
+	Phone     string `json:"phone"`
+	Address   string `json:"address"`
+	Document  string `json:"document"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
 }
 
 type UpdateCostumerOutput struct {
@@ -25,18 +25,18 @@ type IUpdateCostumerUseCase interface {
 	UpdateCostumer(UpdateCostumerInput) (*UpdateCostumerOutput, error)
 }
 
-type updateCostumeruseCase struct {
+type updateCostumerUseCase struct {
 	costumerRepository entity.ICostumerRepository
 }
 
 func NewUpdateCostumerUseCase(CostumerRepository entity.ICostumerRepository) IUpdateCostumerUseCase {
-	return &updateCostumeruseCase{
+	return &updateCostumerUseCase{
 		costumerRepository: CostumerRepository,
 	}
 }
 
-func (u *updateCostumeruseCase) UpdateCostumer(input UpdateCostumerInput) (*UpdateCostumerOutput, error) {
-	newCostumer, err := entity.NewCostumerFactory(input.Email, input.Phone, input.Adress, input.Document, input.FirstName, input.LastName)
+func (u *updateCostumerUseCase) UpdateCostumer(input UpdateCostumerInput) (*UpdateCostumerOutput, error) {
+	newCostumer, err := entity.NewCostumerFactory(input.Email, input.Phone, input.Address, input.Document, input.FirstName, input.LastName)
 	if err != nil {
 		return nil, err
 	}
