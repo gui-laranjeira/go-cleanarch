@@ -5,7 +5,7 @@ import (
 )
 
 type FindUserByIDInput struct {
-	ID string `json:"ID`
+	ID string `json:"ID"`
 }
 
 type FindUserByIDOutput struct {
