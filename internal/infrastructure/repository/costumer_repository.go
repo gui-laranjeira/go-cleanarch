@@ -56,3 +56,41 @@ func (r *CostumerSQLRepository) Update(newCostumer *entity.Costumer) (int64, err
 	}
 	return rowsAffected, nil
 }
+
+func (r *CostumerSQLRepository) FindAll() ([]*entity.Costumer, error) {
+	query := `SELECT * FROM costumers`
+	rows, err := r.db.Query(query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var costumers []*entity.Costumer
+	for rows.Next() {
+		var costumer entity.Costumer
+		err = rows.Scan(&costumer.ID, &costumer.Email, &costumer.Phone, &costumer.Address, &costumer.Document, &costumer.FirstName, &costumer.LastName, &costumer.CreatedAt, &costumer.UpdatedAt, &costumer.CurrentBookID)
+		if err != nil {
+			return nil, err
+		}
+		costumers = append(costumers, &costumer)
+	}
+
+	return costumers, nil
+}
+
+func (r *CostumerSQLRepository) FindByID(id string) (*entity.Costumer, error) {
+	query := `SELECT * FROM costumers WHERE id_costumer = $1`
+	rows, err := r.db.Query(query, id)
+	if err != nil {
+		return nil, err
+	}
+
+	var costumer entity.Costumer
+	for rows.Next() {
+		err = rows.Scan(&costumer.ID, &costumer.Email, &costumer.Phone, &costumer.Address, &costumer.Document, &costumer.FirstName, &costumer.LastName, &costumer.CreatedAt, &costumer.UpdatedAt, &costumer.CurrentBookID)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return &costumer, nil
+}
