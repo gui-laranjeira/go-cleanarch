@@ -18,9 +18,8 @@ func NewCostumerSQLRepository(db *sql.DB) entity.ICostumerRepository {
 }
 
 func (r *CostumerSQLRepository) Create(Costumer *entity.Costumer) error {
-	sqlStatement := `INSERT INTO Costumers (id_costumer, email, phone, adress, document, first_name, last_name, created_at, updated_at) 
-	VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
-	rows, err := r.db.Exec(sqlStatement, Costumer.ID, Costumer.Email, Costumer.Phone, Costumer.Address, Costumer.Document, Costumer.FirstName, Costumer.LastName, Costumer.CreatedAt, Costumer.UpdatedAt)
+	sqlStatement := `INSERT INTO costumers (id_costumer, email, phone, address, document, first_name, last_name, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`
+	rows, err := r.db.Exec(sqlStatement, Costumer.ID.String(), Costumer.Email, Costumer.Phone, Costumer.Address, Costumer.Document, Costumer.FirstName, Costumer.LastName, Costumer.CreatedAt, Costumer.UpdatedAt)
 	if err != nil {
 		return err
 	}

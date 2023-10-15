@@ -38,17 +38,22 @@ func (c findCostumerByIDUseCase) FindCostumerByID(input FindCostumerByIDInput) (
 	if err != nil {
 		return nil, err
 	}
+	var output FindCostumerByIDOutput
 
-	return &FindCostumerByIDOutput{
-		ID:            costumer.ID.String(),
-		Email:         costumer.Email,
-		Phone:         costumer.Phone,
-		Address:       costumer.Address,
-		Document:      costumer.Document,
-		FirstName:     costumer.FirstName,
-		LastName:      costumer.LastName,
-		CreatedAt:     costumer.CreatedAt.String(),
-		UpdatedAt:     costumer.UpdatedAt.String(),
-		CurrentBookID: costumer.CurrentBookID.String(),
-	}, nil
+	output.ID = costumer.ID.String()
+	output.Email = costumer.Email
+	output.Phone = costumer.Phone
+	output.Address = costumer.Address
+	output.Document = costumer.Document
+	output.FirstName = costumer.FirstName
+	output.LastName = costumer.LastName
+	output.CreatedAt = costumer.CreatedAt.String()
+	output.UpdatedAt = costumer.UpdatedAt.String()
+	if costumer.CurrentBookID == nil {
+		output.CurrentBookID = ""
+	} else {
+		output.CurrentBookID = costumer.CurrentBookID.String()
+	}
+
+	return &output, nil
 }

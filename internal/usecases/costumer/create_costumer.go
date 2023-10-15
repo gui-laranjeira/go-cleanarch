@@ -3,13 +3,12 @@ package usecases
 import "github.com/gui-laranjeira/go-cleanarch/internal/entity"
 
 type CreateCostumerInput struct {
-	Email     string
-	Phone     string
-	Adress    string
-	Document  string
-	Password  string
-	FirstName string
-	LastName  string
+	Email     string `json:"email"`
+	Phone     string `json:"phone"`
+	Address   string `json:"address"`
+	Document  string `json:"document"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
 }
 
 type CreateCostumerOutput struct {
@@ -31,14 +30,14 @@ func NewCreateCostumerUseCase(CostumerRepository entity.ICostumerRepository) ICr
 }
 
 func (c *createCostumerUseCase) CreateCostumer(input CreateCostumerInput) error {
-	costumer, err := entity.NewCostumerFactory(input.Email, input.Phone, input.Adress, input.Document, input.FirstName, input.LastName)
+	costumer, err := entity.NewCostumerFactory(input.Email, input.Phone, input.Address, input.Document, input.FirstName, input.LastName)
 	if err != nil {
 		return nil
 	}
 
 	err = c.costumerRepository.Create(costumer)
 	if err != nil {
-		return nil
+		return err
 	}
 
 	return nil
