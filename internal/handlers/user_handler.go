@@ -57,6 +57,12 @@ func UpdateUserHandler(w http.ResponseWriter, r *http.Request) {
 	var input usecases.UpdateUserInput
 
 	id := chi.URLParam(r, "id")
+	oldData, err := repo.GetUserByID(id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusNotFound)
+		log.Printf("User not found: %v", err)
+		return
+	}
 
 	err = json.NewDecoder(r.Body).Decode(&input)
 	if err != nil {
@@ -65,6 +71,18 @@ func UpdateUserHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	input.ID = id
+	if input.Email == "" {
+		input.Email = oldData.Email
+	}
+	if input.Phone == "" {
+		input.Phone = oldData.Phone
+	}
+	if input.FirstName == "" {
+		input.FirstName = oldData.FirstName
+	}
+	if input.LastName == "" {
+		input.LastName = oldData.LastName
+	}
 
 	output, err := uc.UpdateUser(input)
 	if err != nil {

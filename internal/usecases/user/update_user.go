@@ -23,17 +23,17 @@ type IUpdateUserUseCase interface {
 	UpdateUser(UpdateUserInput) (*UpdateUserOutput, error)
 }
 
-type updateUseruseCase struct {
+type updateUserUseCase struct {
 	userRepository entity.IUserRepository
 }
 
 func NewUpdateUserUseCase(userRepository entity.IUserRepository) IUpdateUserUseCase {
-	return &updateUseruseCase{
+	return &updateUserUseCase{
 		userRepository: userRepository,
 	}
 }
 
-func (u *updateUseruseCase) UpdateUser(input UpdateUserInput) (*UpdateUserOutput, error) {
+func (u *updateUserUseCase) UpdateUser(input UpdateUserInput) (*UpdateUserOutput, error) {
 	newUser, err := entity.NewUserFactory(input.Email, input.Phone, "123456", input.FirstName, input.LastName)
 	if err != nil {
 		return nil, err
