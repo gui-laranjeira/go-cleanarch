@@ -22,7 +22,7 @@ func OpenConnection() (*sql.DB, error) {
 
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
-		log.Fatalf("Error openning connection with postgres: %v", err)
+		log.Fatalf("Error opening connection with postgres: %v", err)
 
 	}
 

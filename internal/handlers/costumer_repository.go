@@ -15,7 +15,7 @@ func CreateCostumerHandler(w http.ResponseWriter, r *http.Request) {
 	db, err := db.OpenConnection()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-		log.Printf("Error while openning connection: %v", err)
+		log.Printf("Error while opening connection: %v", err)
 		return
 	}
 	repo := repository.NewCostumerSQLRepository(db)
@@ -43,7 +43,7 @@ func UpdateCostumerHandler(w http.ResponseWriter, r *http.Request) {
 	db, err := db.OpenConnection()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-		log.Printf("Error while openning connection: %v", err)
+		log.Printf("Error while opening connection: %v", err)
 		return
 	}
 	repo := repository.NewCostumerSQLRepository(db)
