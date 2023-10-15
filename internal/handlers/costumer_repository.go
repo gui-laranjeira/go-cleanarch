@@ -71,7 +71,10 @@ func UpdateCostumerHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(output)
 }
 
-// TODO Implement BorrowBook and ReturnBook Handlers
-func BorrowBookHandler(w http.ResponseWriter, r *http.Request) {}
+func GetAllCostumersHandler(w http.ResponseWriter, r *http.Request) {
 
-func ReturnBookHandler(w http.ResponseWriter, r *http.Request) {}
+}
+
+func GetCostumerByIDHandler(w http.ResponseWriter, r *http.Request) {
+
+}

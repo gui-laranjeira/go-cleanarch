@@ -5,9 +5,16 @@ import (
 )
 
 type StockEntry struct {
-	BookID    uuid.UUID `json:"id_book"`
-	StockID   uuid.UUID `json:"id_stock"`
-	Available string    `json:"avaiable"`
+	BookID     uuid.UUID `json:"id_book"`
+	StockID    uuid.UUID `json:"id_stock"`
+	Available  string    `json:"available"`
+	CostumerID uuid.UUID `json:"id_user"`
+}
+
+type IStockRepository interface {
+	CreateStockEntry(entry *StockEntry) error
+	BorrowBook(entry *StockEntry, costumer *Costumer) error
+	ReturnBook(entry *StockEntry, costumer *Costumer) error
 }
 
 func NewStockEntryFactory(book_id uuid.UUID, available string) (*StockEntry, error) {

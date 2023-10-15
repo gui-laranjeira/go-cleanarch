@@ -34,6 +34,13 @@ func main() {
 		r.Patch("/secret/{id}", handlers.UpdatePasswordHandler)
 	})
 
+	r.Route("/api/v1/costumers", func(r chi.Router) {
+		r.Get("/", handlers.GetAllCostumersHandler)
+		r.Get("/{id}", handlers.GetCostumerByIDHandler)
+		r.Post("/", handlers.CreateCostumerHandler)
+		r.Put("/{id}", handlers.UpdateCostumerHandler)
+	})
+
 	fmt.Println("Server is running on port :" + configs.GetPort())
 	http.ListenAndServe(fmt.Sprintf(":%s", configs.GetPort()), r)
 }

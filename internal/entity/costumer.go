@@ -10,7 +10,7 @@ type Costumer struct {
 	ID            uuid.UUID   `json:"id_costumer"`
 	Email         string      `json:"email"`
 	Phone         string      `json:"phone"`
-	Adress        string      `json:"adress"`
+	Address       string      `json:"address"`
 	Document      string      `json:"document"`
 	FirstName     string      `json:"first_name"`
 	LastName      string      `json:"last_name"`
@@ -23,16 +23,14 @@ type Costumer struct {
 type ICostumerRepository interface {
 	Create(costumer *Costumer) error
 	Update(costumer *Costumer) (int64, error)
-	BorrowBook(costumer_id string, book_id string) error
-	ReturnBook(costumer_id string, book_id string) error
 }
 
-func NewCostumerFactory(email string, phone string, adress string, document string, firstName string, lastName string) (*Costumer, error) {
+func NewCostumerFactory(email string, phone string, address string, document string, firstName string, lastName string) (*Costumer, error) {
 	r := Costumer{
 		ID:            uuid.New(),
 		Email:         email,
 		Phone:         phone,
-		Adress:        adress,
+		Address:       address,
 		Document:      document,
 		FirstName:     firstName,
 		LastName:      lastName,
@@ -51,7 +49,7 @@ func NewCostumerFactory(email string, phone string, adress string, document stri
 }
 
 func (u *Costumer) validateUser() error {
-	if u.Email == "" || u.Phone == "" || u.Adress == "" || u.Document == "" || u.FirstName == "" || u.LastName == "" || u.CreatedAt.String() == "" {
+	if u.Email == "" || u.Phone == "" || u.Address == "" || u.Document == "" || u.FirstName == "" || u.LastName == "" || u.CreatedAt.String() == "" {
 		return ErrInvalidEntity
 	}
 	return nil
