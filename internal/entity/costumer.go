@@ -7,22 +7,23 @@ import (
 )
 
 type Costumer struct {
-	ID            uuid.UUID   `json:"id_costumer"`
-	Email         string      `json:"email"`
-	Phone         string      `json:"phone"`
-	Address       string      `json:"address"`
-	Document      string      `json:"document"`
-	FirstName     string      `json:"first_name"`
-	LastName      string      `json:"last_name"`
-	CreatedAt     time.Time   `json:"created_at"`
-	UpdatedAt     time.Time   `json:"updated_at"`
-	Books         []uuid.UUID `json:"books"`
-	CurrentBookID *uuid.UUID  `json:"current_book_id"`
+	ID            uuid.UUID  `json:"id_costumer"`
+	Email         string     `json:"email"`
+	Phone         string     `json:"phone"`
+	Address       string     `json:"address"`
+	Document      string     `json:"document"`
+	FirstName     string     `json:"first_name"`
+	LastName      string     `json:"last_name"`
+	CreatedAt     time.Time  `json:"created_at"`
+	UpdatedAt     time.Time  `json:"updated_at"`
+	CurrentBookID *uuid.UUID `json:"current_book_id"`
 }
 
 type ICostumerRepository interface {
 	Create(costumer *Costumer) error
 	Update(costumer *Costumer) (int64, error)
+	FindAll() ([]*Costumer, error)
+	FindByID(id string) (*Costumer, error)
 }
 
 func NewCostumerFactory(email string, phone string, address string, document string, firstName string, lastName string) (*Costumer, error) {
