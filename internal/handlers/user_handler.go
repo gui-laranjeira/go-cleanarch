@@ -87,7 +87,7 @@ func UpdateUserHandler(w http.ResponseWriter, r *http.Request) {
 	output, err := uc.UpdateUser(input)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-		log.Printf("Error while updateing user: %v", err)
+		log.Printf("Error while updating user: %v", err)
 		return
 	}
 
