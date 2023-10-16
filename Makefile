@@ -4,11 +4,17 @@ build:
 run:
 	@go run cmd/server/main.go
 
-compile:
-	@CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /bin cmd/server/main.go
+test: 
+	@go test ./...
 
-create_container: 
-	@docker run --name library-api -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d postgres:12-alpine
+test_coverage:
+	@go test ./... -coverprofile=coverage.out
 
-create_db:
-	@docker exec -it library-api createdb --username=postgres --owner=postgres library-create_db
+up:
+	@docker compose up
+
+down:
+	@docker compose down
+
+up_db:
+	@docker compose up postgresdb
