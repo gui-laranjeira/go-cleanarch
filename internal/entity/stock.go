@@ -5,21 +5,24 @@ import (
 )
 
 type StockEntry struct {
-	BookID     uuid.UUID `json:"id_book"`
-	StockID    uuid.UUID `json:"id_stock"`
-	Available  string    `json:"available"`
-	CostumerID uuid.UUID `json:"id_user"`
+	BookID    uuid.UUID `json:"id_book"`
+	StockID   uuid.UUID `json:"id_stock_entry"`
+	Available bool      `json:"available"`
 }
 
 type IStockRepository interface {
 	CreateStockEntry(entry *StockEntry) error
-	BorrowBook(entry *StockEntry, costumer *Costumer) error
-	ReturnBook(entry *StockEntry, costumer *Costumer) error
+	GetAllStock() ([]*StockEntry, error)
+	GetStockEntryByID(id string) (*StockEntry, error)
+	GetStockEntryByBookID(id_book string) ([]*StockEntry, error)
+	DeleteStockEntry(id_stock_entry string) (int64, error)
+	BorrowBook(id_stock_entry string, id_costumer string) error
+	ReturnBook(id_stock_entry string, id_costumer string) error
 }
 
-func NewStockEntryFactory(book_id uuid.UUID, available string) (*StockEntry, error) {
+func NewStockEntryFactory(book_id string, available bool) (*StockEntry, error) {
 	r := StockEntry{
-		BookID:    book_id,
+		BookID:    uuid.MustParse(book_id),
 		StockID:   uuid.New(),
 		Available: available,
 	}

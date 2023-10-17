@@ -9,7 +9,7 @@ import (
 )
 
 func TestNewStockEntry(t *testing.T) {
-	r, err := entity.NewStockEntryFactory(uuid.New(), "S")
+	r, err := entity.NewStockEntryFactory(uuid.New().String(), true)
 	assert.Nil(t, err)
 	assert.NotNil(t, r)
 }
