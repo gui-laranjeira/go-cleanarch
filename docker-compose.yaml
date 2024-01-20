@@ -5,6 +5,7 @@ services:
         dockerfile: Dockerfile
         context: .
         target: final
+      container_name: go-cleanarch
       ports:
         - 8080:8080
       restart: unless-stopped
