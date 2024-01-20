@@ -18,7 +18,9 @@ func NewCostumerSQLRepository(db *sql.DB) entity.ICostumerRepository {
 }
 
 func (r *CostumerSQLRepository) Create(Costumer *entity.Costumer) error {
-	sqlStatement := `INSERT INTO costumers (id_costumer, email, phone, address, document, first_name, last_name, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`
+	sqlStatement := `INSERT INTO costumers (id_costumer, email, phone, address, document, first_name, last_name, created_at, updated_at) 
+					      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`
+
 	rows, err := r.db.Exec(sqlStatement, Costumer.ID.String(), Costumer.Email, Costumer.Phone, Costumer.Address, Costumer.Document, Costumer.FirstName, Costumer.LastName, Costumer.CreatedAt, Costumer.UpdatedAt)
 	if err != nil {
 		return err
@@ -41,7 +43,12 @@ func (r *CostumerSQLRepository) Create(Costumer *entity.Costumer) error {
 }
 
 func (r *CostumerSQLRepository) Update(newCostumer *entity.Costumer) (int64, error) {
-	SqlStatement := `UPDATE Costumers SET email = $1, phone = $2, first_name = $3, last_name = $4, updated_at = $5, address = $6, document = $7 WHERE id_Costumer=$8`
+
+	SqlStatement := `UPDATE Costumers 
+						SET email = $1, phone = $2, first_name = $3, last_name = $4, updated_at = $5, 
+					 		address = $6, document = $7 
+					  WHERE id_Costumer=$8`
+
 	rows, err := r.db.Exec(SqlStatement, newCostumer.Email, newCostumer.Phone,
 		newCostumer.FirstName, newCostumer.LastName, newCostumer.UpdatedAt,
 		newCostumer.Address, newCostumer.Document, newCostumer.ID)
@@ -67,7 +74,9 @@ func (r *CostumerSQLRepository) FindAll() ([]*entity.Costumer, error) {
 	var costumers []*entity.Costumer
 	for rows.Next() {
 		var costumer entity.Costumer
-		err = rows.Scan(&costumer.ID, &costumer.Email, &costumer.Phone, &costumer.Address, &costumer.Document, &costumer.FirstName, &costumer.LastName, &costumer.CreatedAt, &costumer.UpdatedAt, &costumer.CurrentBookID)
+		err = rows.Scan(&costumer.ID, &costumer.Email, &costumer.Phone, &costumer.Address, &costumer.Document,
+			&costumer.FirstName, &costumer.LastName, &costumer.CreatedAt, &costumer.UpdatedAt, &costumer.CurrentBookID)
+
 		if err != nil {
 			return nil, err
 		}
@@ -86,7 +95,9 @@ func (r *CostumerSQLRepository) FindByID(id string) (*entity.Costumer, error) {
 
 	var costumer entity.Costumer
 	for rows.Next() {
-		err = rows.Scan(&costumer.ID, &costumer.Email, &costumer.Phone, &costumer.Address, &costumer.Document, &costumer.FirstName, &costumer.LastName, &costumer.CreatedAt, &costumer.UpdatedAt, &costumer.CurrentBookID)
+		err = rows.Scan(&costumer.ID, &costumer.Email, &costumer.Phone, &costumer.Address, &costumer.Document,
+			&costumer.FirstName, &costumer.LastName, &costumer.CreatedAt, &costumer.UpdatedAt, &costumer.CurrentBookID)
+
 		if err != nil {
 			return nil, err
 		}

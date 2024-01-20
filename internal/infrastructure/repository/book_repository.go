@@ -19,8 +19,11 @@ func NewBookSQLRepository(db *sql.DB) entity.IBookRepository {
 }
 
 func (r *BookSQLRepository) Create(book *entity.Book) error {
-	sqlStatement := `INSERT INTO books (id_book, title, author, pages, publisher, year, isbn, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`
-	rows, err := r.db.Exec(sqlStatement, book.ID, book.Title, book.Author, book.Pages, book.Publisher, book.Year, book.ISBN, book.CreatedAt, book.UpdatedAt)
+	sqlStatement := `INSERT INTO books (id_book, title, author, pages, publisher, year, isbn, created_at, updated_at) 
+						  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`
+
+	rows, err := r.db.Exec(sqlStatement, book.ID, book.Title, book.Author, book.Pages, book.Publisher, book.Year,
+		book.ISBN, book.CreatedAt, book.UpdatedAt)
 	if err != nil {
 		return err
 	}
@@ -41,7 +44,10 @@ func (r *BookSQLRepository) Create(book *entity.Book) error {
 }
 
 func (r *BookSQLRepository) Update(newBook *entity.Book) (int64, error) {
-	sqlStatement := `UPDATE books SET title = $1, author = $2, pages = $3, publisher = $4, year = $5, isbn = $6, updated_at = $7 WHERE id_book=$8`
+	sqlStatement := `UPDATE books 
+						SET title = $1, author = $2, pages = $3, publisher = $4, year = $5, isbn = $6, updated_at = $7 
+					  WHERE id_book=$8`
+
 	rows, err := r.db.Exec(sqlStatement, newBook.Title, newBook.Author, newBook.Pages, newBook.Publisher, newBook.Year, newBook.ISBN, newBook.UpdatedAt, newBook.ID)
 	if err != nil {
 		return 0, err

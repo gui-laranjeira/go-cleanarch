@@ -119,7 +119,7 @@ func (r *StockSQLRepository) BorrowBook(id_stock_entry string, id_costumer strin
 	if err != nil {
 		return err
 	}
-	//TODO implement the insert in the borrow_history table
+	//TODO: implement the insert in the borrow_history table
 
 	return nil
 }
@@ -129,7 +129,7 @@ func (r *StockSQLRepository) ReturnBook(id_stock_entry string, id_costumer strin
 	if err != nil {
 		return err
 	}
-	//TODO implement the update in the borrow_history table
+	//TODO: implement the update in the borrow_history table
 
 	return nil
 }
