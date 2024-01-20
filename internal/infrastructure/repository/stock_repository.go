@@ -120,7 +120,7 @@ func (r *StockSQLRepository) BorrowBook(id_stock_entry string, id_costumer strin
 		return err
 	}
 	//TODO: implement the insert in the borrow_history table
-
+	query = `INSERT INTO borrow_history (id_stock_entry, id_costumer) VALUES ($1, $2)`
 	return nil
 }
 func (r *StockSQLRepository) ReturnBook(id_stock_entry string, id_costumer string) error {

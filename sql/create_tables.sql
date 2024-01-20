@@ -42,11 +42,10 @@ CREATE TABLE IF NOT EXISTS costumers (
 
 CREATE TABLE IF NOT EXISTS borrow_history (
     id_costumer VARCHAR(100) NOT NULL,
-    id_book VARCHAR(100) NOT NULL,
     id_stock VARCHAR(100) NOT NULL,
     borrowed_date TIMESTAMP NOT NULL,
     due_date TIMESTAMP NOT NUll,
-    returned CHAR(1) not null
+    returned boolean not null
 );
 
 CREATE TABLE IF NOT EXISTS stock (

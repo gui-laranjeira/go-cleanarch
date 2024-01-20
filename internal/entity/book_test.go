@@ -15,7 +15,7 @@ func TestNewBook(t *testing.T) {
 	assert.Equal(t, b.Title, "The Trial")
 }
 
-func TestValidadeBook(t *testing.T) {
+func TestValidateBook(t *testing.T) {
 	type test struct {
 		title      string
 		author     string
