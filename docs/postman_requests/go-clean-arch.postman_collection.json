@@ -55,8 +55,10 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
-								"exec": []
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -74,7 +76,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/books/5ae508f6-d050-49f1-9aa5-73aaec8156e0",
+							"raw": "http://localhost:8080/api/v1/books/3e2dea79-8db7-4f94-9d91-db8d19a9cb27",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -84,7 +86,7 @@
 								"api",
 								"v1",
 								"books",
-								"5ae508f6-d050-49f1-9aa5-73aaec8156e0"
+								"3e2dea79-8db7-4f94-9d91-db8d19a9cb27"
 							]
 						}
 					},
@@ -729,6 +731,138 @@
 								"v1",
 								"costumers",
 								"14d6c480-328f-4db9-aae4-aa82136b54de"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stock",
+			"item": [
+				{
+					"name": "STOCK - Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "STOCK - Get By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/stock/a3ea4477-1025-49d4-9f94-eaa738b1793b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"stock",
+								"a3ea4477-1025-49d4-9f94-eaa738b1793b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "STOCK - Get By Book ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/stock/book/3e2dea79-8db7-4f94-9d91-db8d19a9cb27",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"stock",
+								"book",
+								"3e2dea79-8db7-4f94-9d91-db8d19a9cb27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "STOCK - Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_book\": \"99d38b22-59e8-4739-afcc-6c96e1b2cc92\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "STOCK - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_stock_entry\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/stock/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"stock",
+								""
 							]
 						}
 					},
