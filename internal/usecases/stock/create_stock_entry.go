@@ -38,7 +38,7 @@ func (u *createStockEntryUseCase) CreateStockEntry(input CreateStockEntryInput) 
 	}
 
 	return &CreateStockEntryOutput{
-		StockID:   stockEntry.BookID.String(),
+		StockID:   stockEntry.StockID.String(),
 		BookID:    stockEntry.BookID.String(),
 		Available: stockEntry.Available,
 	}, nil

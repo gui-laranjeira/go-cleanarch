@@ -185,14 +185,13 @@ func DeleteBookHandler(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Error while deleting book: %v", err)
 		return
 	}
+	if output.RowsAffected <= 0 {
+		w.WriteHeader(http.StatusNotFound)
+	}
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(output)
 
-	if output.RowsAffected <= 0 {
-		w.WriteHeader(http.StatusNotFound)
-		return
-	}
 }
 
 func UpdateBookHandler(w http.ResponseWriter, r *http.Request) {
