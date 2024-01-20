@@ -41,6 +41,16 @@ func main() {
 		r.Put("/{id}", handlers.UpdateCostumerHandler)
 	})
 
+	r.Route("/api/v1/stock", func(r chi.Router) {
+		r.Get("/", handlers.GetAllStockHandler)
+		r.Get("/{id}", handlers.GetStockEntryByIDHandler)
+		r.Get("/book/{id}", handlers.GetStockEntryByBookIDHandler)
+		r.Post("/", handlers.CreateStockEntryHandler)
+		r.Delete("/{id}", handlers.DeleteStockEntryHandler)
+		r.Patch("/{id}/borrow", handlers.BorrowBookHandler)
+		r.Patch("/{id}/return", handlers.ReturnBookHandler)
+	})
+
 	fmt.Println("Server is running on port :" + configs.GetPort())
 	http.ListenAndServe(fmt.Sprintf(":%s", configs.GetPort()), r)
 }

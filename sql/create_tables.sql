@@ -52,6 +52,5 @@ CREATE TABLE IF NOT EXISTS borrow_history (
 CREATE TABLE IF NOT EXISTS stock (
     id_stock_entry VARCHAR(100) NOT NULL,
     id_book VARCHAR(100) NOT NULL,
-    available CHAR(1) NOT NULL,
-    id_costumer VARCHAR(100)
+    available BOOLEAN NOT NULL
 );

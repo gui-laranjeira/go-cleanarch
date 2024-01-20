@@ -1,0 +1,914 @@
+{
+	"info": {
+		"_postman_id": "79ea09fd-647a-4c83-9819-89fec0386486",
+		"name": "go-clean-arch",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24993814"
+	},
+	"item": [
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "BOOK - Get All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": []
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "insomnia/8.2.0"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BOOK - Get By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "insomnia/8.2.0"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/books/3e2dea79-8db7-4f94-9d91-db8d19a9cb27",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"3e2dea79-8db7-4f94-9d91-db8d19a9cb27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BOOK - Get by author, title or publisher",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": []
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "insomnia/8.2.0"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/books?title=neuromancer&author=robert&publisher=penguin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"books"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "neuromancer"
+								},
+								{
+									"key": "author",
+									"value": "robert"
+								},
+								{
+									"key": "publisher",
+									"value": "penguin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BOOK - Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": []
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "insomnia/8.2.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"title\": \"Hacking: The Art of Exploitation, 2nd Edition\",\n\t\"author\": \"Jon Erickson\",\n\t\"pages\": 854,\n\t\"publisher\": \"No Starch Press\",\n\t\"year\": 2008,\n\t\"isbn\": \"9781593271442\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BOOK - Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": []
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "insomnia/8.2.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"title\": \"Hacking: The Art of Exploitation, 2nd Edition\",\n\t\"author\": \"Jon Erickson\",\n\t\"pages\": 855,\n\t\"publisher\": \"No Starch Press\",\n\t\"year\": 2008,\n\t\"isbn\": \"9781593271442\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/books/e41db08e-0fbf-46ff-ba82-3751d75ee370",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"e41db08e-0fbf-46ff-ba82-3751d75ee370"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BOOK - Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": []
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "insomnia/8.2.0"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/books/5ae508f6-d050-49f1-9aa5-73aaec8156e0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"5ae508f6-d050-49f1-9aa5-73aaec8156e0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "USER - Get All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": []
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "insomnia/8.2.0"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER - GetBy ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": []
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "insomnia/8.2.0"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/a4ce9866-c04e-4026-8ea9-d6adf761e2b8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"a4ce9866-c04e-4026-8ea9-d6adf761e2b8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER - Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": []
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "insomnia/8.2.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"teste@teste.com\",\n\t\"phone\": \"987654321\",\n\t\"password\": \"Teste\",\n\t\"first_name\": \"Antonia\",\n\t\"last_name\": \"Teste\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER - Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": []
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "insomnia/8.2.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"teste@teste.com\",\n\t\"phone\": \"987654321\",\n\t\"first_name\": \"Antoniaeta\",\n\t\"last_name\": \"Teste\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/a4ce9866-c04e-4026-8ea9-d6adf761e2b8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"a4ce9866-c04e-4026-8ea9-d6adf761e2b8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER - Update Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": []
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "insomnia/8.2.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"password\": \"Teste1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/secret/a4ce9866-c04e-4026-8ea9-d6adf761e2b8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"secret",
+								"a4ce9866-c04e-4026-8ea9-d6adf761e2b8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Costumer",
+			"item": [
+				{
+					"name": "COSTUMER - Get All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": []
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "insomnia/8.2.0"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/costumers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"costumers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COSTUMER - Get By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": []
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "insomnia/8.2.0"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/costumers/14d6c480-328f-4db9-aae4-aa82136b54de",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"costumers",
+								"14d6c480-328f-4db9-aae4-aa82136b54de"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COSTUMER - Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": []
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "insomnia/8.2.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"teste@teste.com\",\n\t\"phone\": \"987654321\",\n\t\"address\": \"R. das Pedras, 1\",\n\t\"document\": \"101001001\",\n\t\"first_name\": \"Antonia\",\n\t\"last_name\": \"Teste\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/costumers/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"costumers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COSTUMER - Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": []
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "insomnia/8.2.0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"teste@teste.com\",\n\t\"phone\": \"987654321\",\n\t\"address\": \"R. das Pedras, 1\",\n\t\"document\": \"101001001\",\n\t\"first_name\": \"anotineta\",\n\t\"last_name\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/costumers/14d6c480-328f-4db9-aae4-aa82136b54de",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"costumers",
+								"14d6c480-328f-4db9-aae4-aa82136b54de"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stock",
+			"item": [
+				{
+					"name": "STOCK - Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "STOCK - Get By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/stock/a3ea4477-1025-49d4-9f94-eaa738b1793b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"stock",
+								"a3ea4477-1025-49d4-9f94-eaa738b1793b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "STOCK - Get By Book ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/stock/book/3e2dea79-8db7-4f94-9d91-db8d19a9cb27",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"stock",
+								"book",
+								"3e2dea79-8db7-4f94-9d91-db8d19a9cb27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "STOCK - Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_book\": \"99d38b22-59e8-4739-afcc-6c96e1b2cc92\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "STOCK - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_stock_entry\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/stock/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"stock",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PING",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": []
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"followRedirects": true,
+				"disableUrlEncoding": false,
+				"disableCookies": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "insomnia/8.2.0"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/ping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"ping"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
