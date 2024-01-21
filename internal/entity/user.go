@@ -28,7 +28,7 @@ type IUserRepository interface {
 }
 
 func NewUserFactory(email string, phone string, password string, firstName string, lastName string) (*User, error) {
-	err := validadePassword(password)
+	err := validatePassword(password)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ func (u *User) validateUser() error {
 	return nil
 }
 
-func validadePassword(password string) error {
+func validatePassword(password string) error {
 	if password == "" {
 		return ErrInvalidEntity
 	}
