@@ -39,8 +39,6 @@ func TestValidateBorrow(t *testing.T) {
 	}
 
 	for _, tc := range tests {
-		t.Logf(`Costumer "%s"`, tc.id_costumer)
-		t.Logf(`Stock "%s"`, tc.id_stock_entry)
 		_, err := entity.NewBorrowEntryFactory(tc.id_costumer, tc.id_stock_entry)
 		assert.Equal(t, tc.expect, err)
 	}

@@ -1,7 +1,6 @@
 package entity
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/google/uuid"
@@ -49,8 +48,6 @@ func NewBorrowEntryFactory(id_costumer string, id_stock_entry string) (*BorrowEn
 }
 
 func (b *BorrowEntry) ValidateBorrowEntry() error {
-	fmt.Printf(`Costumer "%s"`, b.CostumerID)
-	fmt.Printf(`Stock "%s"`, b.StockEntryID)
 	if b.CostumerID.String() == "" || b.StockEntryID.String() == "" || b.BorrowDate.String() == "" || b.DueDate.String() == "" || b.CostumerID.String() == "00000000-0000-0000-0000-000000000000" || b.StockEntryID.String() == "00000000-0000-0000-0000-000000000000" {
 		return ErrInvalidEntity
 	}
