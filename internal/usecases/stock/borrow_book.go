@@ -37,7 +37,7 @@ func (u *borrowBookUseCase) BorrowBook(entry BorrowBookInput) (*BorrowBookOutput
 	if err != nil {
 		return nil, err
 	}
-	if stockEntry.Available == false {
+	if !stockEntry.Available {
 		return nil, err
 	}
 
