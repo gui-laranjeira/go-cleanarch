@@ -13,11 +13,14 @@ type BorrowEntry struct {
 	BorrowDate   time.Time `json:"borrow_date"`
 	DueDate      time.Time `json:"due_date"`
 	Returned     bool      `json:"return_date"`
+	CreatedAt    time.Time `json:"created_at"`
+	UpdatedAt    time.Time `json:"updated_at"`
 }
 
 type IBorrowEntryRepository interface {
-	Borrow(entry *BorrowEntry) error
-	Return(entry *BorrowEntry) error
+	Borrow(entry *BorrowEntry) (int64, error)
+	Return(entry *BorrowEntry) (int64, error)
+	GetBorrowEntryByID(id_stock_entry string, id_costumer string) (*BorrowEntry, error)
 }
 
 type IBorrowEntryUseCase interface {
@@ -35,6 +38,7 @@ func NewBorrowEntryFactory(id_costumer string, id_stock_entry string) (*BorrowEn
 		BorrowDate:   time.Now(),
 		DueDate:      time.Now().AddDate(0, 0, 15),
 		Returned:     false,
+		CreatedAt:    time.Now(),
 	}
 	err := r.ValidateBorrowEntry()
 	if err != nil {

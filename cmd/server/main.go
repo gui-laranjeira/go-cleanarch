@@ -47,7 +47,7 @@ func main() {
 		r.Get("/book/{id}", handlers.GetStockEntryByBookIDHandler)
 		r.Post("/", handlers.CreateStockEntryHandler)
 		r.Delete("/{id}", handlers.DeleteStockEntryHandler)
-		r.Patch("/{id}/borrow", handlers.BorrowBookHandler)
+		r.Post("/{id}/borrow", handlers.BorrowBookHandler)
 		r.Patch("/{id}/return", handlers.ReturnBookHandler)
 	})
 
