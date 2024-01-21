@@ -842,17 +842,8 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id_stock_entry\":\"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/stock/",
+							"raw": "http://localhost:8080/api/v1/stock/79fb1308-13a2-4679-a174-e47b891188fa",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -862,7 +853,76 @@
 								"api",
 								"v1",
 								"stock",
-								""
+								"79fb1308-13a2-4679-a174-e47b891188fa"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Borrow History",
+			"item": [
+				{
+					"name": "BORROW - Borrow",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"id_costumer\": \"14d6c480-328f-4db9-aae4-aa82136b54de\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/stock/a3ea4477-1025-49d4-9f94-eaa738b1793b/borrow",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"stock",
+								"a3ea4477-1025-49d4-9f94-eaa738b1793b",
+								"borrow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BORROW - Return",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"id_costumer\": \"14d6c480-328f-4db9-aae4-aa82136b54de\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/stock/a3ea4477-1025-49d4-9f94-eaa738b1793b/return",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"stock",
+								"a3ea4477-1025-49d4-9f94-eaa738b1793b",
+								"return"
 							]
 						}
 					},
