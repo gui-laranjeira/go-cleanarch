@@ -37,8 +37,16 @@ CREATE TABLE IF NOT EXISTS costumers (
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP,
   current_book_id VARCHAR(100),
-  PRIMARY KEY (id_costumer)
+  PRIMARY KEY (id_costumer),
   FOREIGN KEY(current_book_id) REFERENCES books(id_book)
+);
+
+CREATE TABLE IF NOT EXISTS stock (
+    id_stock_entry VARCHAR(100) NOT NULL,
+    id_book VARCHAR(100) NOT NULL,
+    available BOOLEAN NOT NULL,
+    PRIMARY KEY (id_stock_entry),
+    FOREIGN KEY(id_book) REFERENCES books(id_book)
 );
 
 CREATE TABLE IF NOT EXISTS borrow_history (
@@ -55,10 +63,3 @@ CREATE TABLE IF NOT EXISTS borrow_history (
     FOREIGN KEY(id_costumer)    REFERENCES costumers(id_costumer)
 );
 
-CREATE TABLE IF NOT EXISTS stock (
-    id_stock_entry VARCHAR(100) NOT NULL,
-    id_book VARCHAR(100) NOT NULL,
-    available BOOLEAN NOT NULL,
-    PRIMARY KEY (id_stock_entry),
-    FOREIGN KEY(id_book) REFERENCES books(id_book)
-);
