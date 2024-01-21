@@ -38,20 +38,27 @@ CREATE TABLE IF NOT EXISTS costumers (
   updated_at TIMESTAMP,
   current_book_id VARCHAR(100),
   PRIMARY KEY (id_costumer)
+  FOREIGN KEY(current_book_id) REFERENCES books(id_book)
 );
 
 CREATE TABLE IF NOT EXISTS borrow_history (
+    id_borrow_entry varchar(100) NOT NULL,
     id_costumer VARCHAR(100) NOT NULL,
     id_stock_entry VARCHAR(100) NOT NULL,
     borrow_date TIMESTAMP NOT NULL,
     due_date TIMESTAMP NOT NUll,
     returned boolean not null,
     created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP
+    updated_at TIMESTAMP,
+    PRIMARY KEY (id_borrow_entry),
+    FOREIGN KEY(id_stock_entry) REFERENCES stock(id_stock_entry),
+    FOREIGN KEY(id_costumer)    REFERENCES costumers(id_costumer)
 );
 
 CREATE TABLE IF NOT EXISTS stock (
     id_stock_entry VARCHAR(100) NOT NULL,
     id_book VARCHAR(100) NOT NULL,
-    available BOOLEAN NOT NULL
+    available BOOLEAN NOT NULL,
+    PRIMARY KEY (id_stock_entry),
+    FOREIGN KEY(id_book) REFERENCES books(id_book)
 );
