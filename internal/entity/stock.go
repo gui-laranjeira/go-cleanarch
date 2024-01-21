@@ -21,23 +21,16 @@ type IStockRepository interface {
 }
 
 func NewStockEntryFactory(book_id string, available bool) (*StockEntry, error) {
-	r := StockEntry{
-		BookID:    uuid.MustParse(book_id),
-		StockID:   uuid.New(),
-		Available: available,
-	}
-
-	err := r.validateStockEntry()
+	bookId, err := uuid.Parse(book_id)
 	if err != nil {
 		return nil, ErrInvalidEntity
 	}
 
-	return &r, nil
-}
-
-func (s *StockEntry) validateStockEntry() error {
-	if s.BookID.String() == "" || s.StockID.String() == "" {
-		return ErrInvalidEntity
+	r := StockEntry{
+		BookID:    bookId,
+		StockID:   uuid.New(),
+		Available: available,
 	}
-	return nil
+
+	return &r, nil
 }

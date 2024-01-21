@@ -33,10 +33,7 @@ func NewUserFactory(email string, phone string, password string, firstName strin
 		return nil, err
 	}
 
-	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-	if err != nil {
-		return nil, ErrPasswordHashing
-	}
+	hash, _ := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 
 	r := User{
 		ID:        uuid.New(),
