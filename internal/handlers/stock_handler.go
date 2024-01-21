@@ -154,9 +154,69 @@ func DeleteStockEntryHandler(w http.ResponseWriter, r *http.Request) {
 
 // TODO: Implement borrow and return book handlers
 func BorrowBookHandler(w http.ResponseWriter, r *http.Request) {
+	db, err := db.OpenConnection()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Printf("Error while opening connection: %v", err)
+		return
+	}
+	defer db.Close()
 
+	borrowRepo := repository.NewBorrowEntrySQLRepository(db)
+	stockRepo := repository.NewStockSQLRepository(db)
+	uc := usecases.NewBorrowBookUseCase(borrowRepo, stockRepo)
+
+	var input usecases.BorrowBookInput
+	err = json.NewDecoder(r.Body).Decode(&input)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Printf("Error while decoding request body: %v", err)
+		return
+	}
+	input.StockEntryID = chi.URLParam(r, "id")
+
+	output, err := uc.BorrowBook(input)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Printf("Error borrowing book: %v", err)
+		return
+	}
+
+	w.WriteHeader(http.StatusCreated)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(output)
 }
 
 func ReturnBookHandler(w http.ResponseWriter, r *http.Request) {
+	db, err := db.OpenConnection()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Printf("Error while opening connection: %v", err)
+		return
+	}
+	defer db.Close()
 
+	borrowRepo := repository.NewBorrowEntrySQLRepository(db)
+	stockRepo := repository.NewStockSQLRepository(db)
+	uc := usecases.NewReturnBookUseCase(borrowRepo, stockRepo)
+
+	var input usecases.ReturnBookInput
+	err = json.NewDecoder(r.Body).Decode(&input)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Printf("Error while decoding request body: %v", err)
+		return
+	}
+	input.StockEntryID = chi.URLParam(r, "id")
+
+	output, err := uc.ReturnBook(input)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Printf("Error returning book: %v", err)
+		return
+	}
+
+	w.WriteHeader(http.StatusCreated)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(output)
 }

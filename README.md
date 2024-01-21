@@ -24,14 +24,14 @@ $ make run
 
 ### Main Functionalities
  - [X] Manage books database (inserting, updating, deleting and getting books from it)
- - [ ] Manage current book stock (how many books of each title and who borrowed them)
- - [ ] Manage library customers (keep track of all the books someone has borrowed)
+ - [X] Manage current book stock (how many books of each title and who borrowed them)
+ - [X] Manage library customers (keep track of all the books someone has borrowed)
  - [ ] Browse books (costumer role)
 
 ### TODO 
- - [ ] Config docker compose to run postgres and the app
+ - [X] Config docker compose to run postgres and the app
  - [ ] JWT authentication and authorization
- - [ ] Roles for users (authentication needed) and costumers (no authentication needed)
+ - [ ] Roles for users and costumers 
  - [ ] Universal configuration file, independent of entrypoint used
  - [X] Only search titles, authors and publishers with exact name, must fix to select when contains substrings too
- - [ ] Use Redis to cache main books to display
+ - [ ] Use Redis to cache main books to display by costumer

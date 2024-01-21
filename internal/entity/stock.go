@@ -16,8 +16,8 @@ type IStockRepository interface {
 	GetStockEntryByID(id string) (*StockEntry, error)
 	GetStockEntryByBookID(id_book string) ([]*StockEntry, error)
 	DeleteStockEntry(id_stock_entry string) (int64, error)
-	BorrowBook(id_stock_entry string, id_costumer string) error
-	ReturnBook(id_stock_entry string, id_costumer string) error
+	BorrowBook(id_stock_entry string) error
+	ReturnBook(id_stock_entry string) error
 }
 
 func NewStockEntryFactory(book_id string, available bool) (*StockEntry, error) {

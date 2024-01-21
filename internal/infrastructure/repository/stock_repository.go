@@ -113,23 +113,20 @@ func (r *StockSQLRepository) DeleteStockEntry(id_stock_entry string) (int64, err
 	return rowsAffected, nil
 }
 
-func (r *StockSQLRepository) BorrowBook(id_stock_entry string, id_costumer string) error {
-	query := `UPDATE stock SET available = false WHERE id_stock_entry = $2`
+func (r *StockSQLRepository) BorrowBook(id_stock_entry string) error {
+	query := `UPDATE stock SET available = false WHERE id_stock_entry = $1`
 	_, err := r.db.Exec(query, id_stock_entry)
 	if err != nil {
 		return err
 	}
-	//TODO: implement the insert in the borrow_history table
-
 	return nil
 }
-func (r *StockSQLRepository) ReturnBook(id_stock_entry string, id_costumer string) error {
-	query := `UPDATE stock SET available = true WHERE id_stock_entry = $2`
+func (r *StockSQLRepository) ReturnBook(id_stock_entry string) error {
+	query := `UPDATE stock SET available = true WHERE id_stock_entry = $1`
 	_, err := r.db.Exec(query, id_stock_entry)
 	if err != nil {
 		return err
 	}
-	//TODO: implement the update in the borrow_history table
 
 	return nil
 }
