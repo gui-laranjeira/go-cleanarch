@@ -3,7 +3,7 @@ FROM golang:1.21 as builder
 WORKDIR /app
 
 COPY go.mod go.sum ./
-RUN go mod tidy
+RUN --mount=type=cache,target=./app go mod tidy
 
 COPY . .
 
